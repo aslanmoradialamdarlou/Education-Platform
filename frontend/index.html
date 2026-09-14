@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <!-- Early theme initialization to avoid flash of wrong (default) theme -->
+    <script>
+      (function() {
+        try {
+          // Retrieve stored preferences (if any)
+            var storedGrade = localStorage.getItem('app-grade');
+            var storedMode = localStorage.getItem('app-mode');
+            var grade = storedGrade ? parseInt(storedGrade,10) : 8; // default grade 8
+            if (![7,8,9].includes(grade)) grade = 8;
+            // Force default to light (ignore system preference unless user explicitly saved)
+            var mode = storedMode || 'light';
+            if (mode !== 'dark' && mode !== 'light') mode = 'light';
+            var b = document.documentElement || document.body;
+            // Use body if already present else wait for DOMContentLoaded to set on body
+            function apply(el){
+              el.dataset.grade = String(grade);
+              if (mode === 'dark') el.classList.add('dark-mode');
+            }
+            if (document.body) apply(document.body); else {
+              document.addEventListener('DOMContentLoaded', function(){ apply(document.body); });
+            }
+        } catch(e) { /* fail silently */ }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

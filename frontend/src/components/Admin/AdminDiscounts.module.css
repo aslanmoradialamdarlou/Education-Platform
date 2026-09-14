@@ -1,0 +1,15 @@
+/* Styles specific to the Discounts admin tab */
+
+.usageProgressWrapper { display: flex; gap: 4px; }
+.usageProgressBar { position: relative; width: 100%; height: 8px; background: var(--bg-main); border-radius: 10px; overflow: hidden; }
+.usageProgressFill { position: absolute; inset: 0; width: 0%; background: var(--accent-primary-solid); border-radius: 10px; transition: width .25s ease; }
+.usageProgressText { font-size: 0.75rem; color: var(--text-secondary); width: 5rem; }
+
+/* Optional wrapper for actions to ensure consistent spacing */
+.actionsRow { display: flex; gap: .5rem; align-items: center; justify-content: flex-start; }
+
+/* Make the usage cell span full width in card mode (mobile) */
+@media (max-width: 900px) {
+	.usageCell { display: block; width: 80%; }
+	.usageCell .usageProgressWrapper { width: 80%; }
+}

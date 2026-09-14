@@ -1,0 +1,39 @@
+.hero { position: relative; min-height: 100vh; display: grid; overflow: hidden; width: 100%; }
+@media (max-height: 620px) {
+	.hero { min-height: 620px; }
+}
+.bg {
+	position: absolute; inset: 0;
+		background:
+			url('/images/8th-grade.png') center/cover no-repeat,
+		radial-gradient(800px 300px at 80% -10%, rgba(0, 140, 255, .16), transparent 60%),
+		radial-gradient(900px 320px at 20% 110%, rgba(98, 0, 255, .12), transparent 60%),
+		linear-gradient(180deg, color-mix(in srgb, var(--accent-primary-solid) 6%, transparent), transparent 40%);
+	filter: saturate(1.05);
+}
+.overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); }
+.inner { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 16px; display: grid; grid-template-rows: auto 1fr; }
+.pageHeader { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+.headerLeft { display: flex; align-items: center; gap: .6rem; }
+.logo { color: #fff; font-weight: 800; letter-spacing: .4px; text-decoration: none; }
+.headerRight { display: flex; align-items: center; gap: .6rem; }
+.headerActions { display: inline-flex; gap: .5rem; align-items: center; }
+.loginBtn, .registerBtn { font-family: 'Vazirmatn', sans-serif; font-size: .9rem; padding: .45rem .9rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.6); color: #fff; text-decoration: none; backdrop-filter: blur(6px); background: rgba(255,255,255,0.08); }
+.registerBtn { background: var(--accent-primary-solid); border-color: var(--accent-primary-solid); }
+/* Drawer removed for guest hero */
+.content { position: relative; text-align: right; padding: 2rem 0 3rem; max-width: 640px; margin-left: auto; font-family: 'Vazirmatn', sans-serif; color: #fff; align-self: end; }
+.content h1 { font-size: clamp(1.6rem, 4.5vw, 2.6rem); margin: 0 0 .75rem; }
+.subtitle { color: rgba(255,255,255,0.92); margin: 0 0 0.75rem; font-size: 1.05rem; }
+.inspire { color: rgba(255,255,255,0.82); margin: 0 0 1.25rem; font-size: .98rem; }
+.cta, :global(.MuiButton-root).cta { font-family: 'Vazirmatn', sans-serif; }
+.primaryCta { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .6rem 1.1rem; border-radius: 10px; background: var(--accent-primary-solid); color: #fff; border: 1px solid var(--accent-primary-solid); cursor: pointer; font-family: 'Vazirmatn', sans-serif; font-size: .95rem; font-weight: 600; box-shadow: 0 6px 20px rgba(13,110,253,.25); transition: transform .12s ease, box-shadow .2s ease, opacity .15s ease; }
+.primaryCta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(13,110,253,.28); opacity: .96; }
+.primaryCta:active { transform: translateY(0); box-shadow: 0 6px 20px rgba(13,110,253,.2); }
+.chips { display: inline-flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; padding: 0; list-style: none; justify-content: flex-end; }
+.chips li { display: inline-flex; align-items: center; gap: .35rem; padding: .4rem .7rem; min-height: 34px; border-radius: 999px; background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.18); font-size: .78rem; white-space: nowrap; }
+@media (max-width: 600px) {
+	.chips { justify-content: flex-start; }
+}
+
+/* Reveal animation utility classes (used across guest sections) */
+

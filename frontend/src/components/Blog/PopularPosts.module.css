@@ -1,0 +1,90 @@
+/* PopularPosts.module.css */
+:root {
+  --bg-content: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --accent-primary-solid: #bb86fc;
+}
+
+.popularPosts {
+  background: var(--bg-content);
+  border-radius: 12px;
+  padding: 14px;
+  height: fit-content;
+  color: var(--text-primary);
+  background-color: var(--bg-content);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-primary-solid);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item { display: block; }
+
+.card {
+  display: block;
+  position: relative;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform-origin: center;
+  transition: transform 300ms ease;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+}
+
+.cardTitle {
+  position: absolute;
+  right: 12px; /* RTL friendly */
+  bottom: 10px;
+  left: 12px;
+  color: var(--text-primary);
+  font-weight: 600;
+  z-index: 2;
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  color: #e0e0e0;
+}
+
+.card:hover .bg {
+  transform: scale(1.05);
+}
+
+.card:hover .overlay { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%); }
+
+@media (max-width: 1024px) {
+  .popularPosts { width: 100%; }
+}

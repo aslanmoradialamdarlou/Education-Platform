@@ -1,0 +1,17 @@
+/* Simple GlassCard styling using theme CSS variables */
+.glass-card {
+  background: var(--bg-content);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+  border-color: color-mix(in srgb, var(--accent-primary-solid) 18%, var(--border-color) 82%);
+}
+.glass-card-title { font-size: 1.125rem; font-weight: 700; }

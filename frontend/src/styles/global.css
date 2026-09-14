@@ -1,0 +1,103 @@
+/* src/styles/global.css */
+
+/* --- Google Font Import (Vazirmatn) --- */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
+
+/* --- Global Styles & Resets --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', sans-serif;
+}
+
+body {
+    /* font-family: 'Vazirmatn', sans-serif; */
+    background: var(--bg-main);
+    color: var(--text-primary);
+    direction: rtl;
+    min-height: 100vh;
+    transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+/* Sticky footer layout */
+html, body, #root {
+    height: 100%;
+}
+#root, html {
+    scroll-behavior: smooth;
+}
+#root > div {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Page shell helpers for sticky footer on individual pages */
+.page-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.page-main {
+    flex: 1 1 auto;
+}
+
+a {
+    color: var(--accent-primary-solid);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+    cursor: pointer;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+ul {
+    list-style: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-primary-solid);
+    outline-offset: 3px;
+}
+
+.pageTitle {
+    /* Responsive fluid type for page titles */
+    font-weight: 700;
+    line-height: 1.25;
+    /* scales from ~22px up to ~34px (adjust as needed) */
+    font-size: clamp(1.375rem, 1rem + 1.8vw, 2.125rem);
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    width: 92%;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        width: 94%;
+        padding: 1rem;
+    }
+}
+
+/* Support page grid responsiveness */
+.supportGrid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+}
+@media (max-width: 900px) {
+    .supportGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Reveal animation utility classes (used across guest sections) */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.show { opacity: 1; transform: none; }

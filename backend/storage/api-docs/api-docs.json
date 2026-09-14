@@ -1,0 +1,181 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Edu Platform API",
+        "description": "Public API and Admin CRUD for the Edu Platform.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api",
+            "description": "App relative (e.g., https://yourdomain.com/api)"
+        }
+    ],
+    "paths": {
+        "/api/v1/grades/{gradeId}/books": {
+            "get": {
+                "tags": [
+                    "Catalog"
+                ],
+                "summary": "کتاب‌های علوم برای یک پایه",
+                "operationId": "db4d4af70ce4cccb36fffd24b2f197bf",
+                "parameters": [
+                    {
+                        "name": "gradeId",
+                        "in": "path",
+                        "description": "شناسه پایه",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Books list"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 10
+                                                    },
+                                                    "subject": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "علوم"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "grade": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "هفتم"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "علوم هفتم"
+                                                    },
+                                                    "year": {
+                                                        "type": "integer",
+                                                        "example": 2024
+                                                    },
+                                                    "chapters_count": {
+                                                        "type": "integer",
+                                                        "example": 15
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "NOT_FOUND"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Grade not found"
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ping": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Ping",
+                "operationId": "37de46af4dbbf5e636ff64164d40750a",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/v1/health": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Health (smoke)",
+                "operationId": "259fee4a68fd45494f655d3d651f5b28",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "SanctumBearer": {
+                "type": "http",
+                "description": "Use Laravel Sanctum-issued bearer token",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "System",
+            "description": "Health & version"
+        },
+        {
+            "name": "Catalog",
+            "description": "Grades, books, chapters, contents"
+        }
+    ]
+}

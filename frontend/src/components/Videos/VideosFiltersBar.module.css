@@ -1,0 +1,51 @@
+/* Parity filter bar styles (adapted from SampleQuestions .filtersBar) */
+.bar { display:flex; flex-wrap:wrap; gap:1rem; padding:1rem 0 .25rem; align-items:flex-end; }
+/* We'll rely on outer wrapper (desktopFiltersBarWrapper) for width/padding */
+.row { display:flex; flex-wrap:wrap; width:100%; gap:1rem 1.1rem; }
+
+.group { display:flex; flex-direction:column; gap:.35rem; min-width:170px; position:relative; flex:0 0 170px; }
+/* Ensure all groups render (no collapse) */
+.row > .group, .row > .chipsGroup { box-sizing:border-box; }
+.chipsGroup { flex:0 0 auto; min-width:0; width:auto; }
+.groupWide { flex:0 0 240px; }
+.group label { margin-right:8px; font-size:.8rem; color:var(--text-secondary); }
+.group select, .group input[type="text"] { background: var(--bg-content); border:1px solid var(--border-color); border-radius:999px; padding:.55rem .9rem; font-family:inherit; font-size:.85rem; color:var(--text-primary); min-width:170px; max-width:240px; line-height:1.2; appearance:none; position:relative; box-shadow:0 0 0 0 rgba(0,0,0,0); transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background var(--transition-speed); padding-right:2.2rem; }
+.filterPanel .group select, .filterPanel .group input[type="text"],
+.filterPanelOverlay .group select, .filterPanelOverlay .group input[type="text"] { background: var(--bg-elevated, #fff); }
+.group select:focus, .group input[type="text"]:focus { outline:none; border-color: var(--accent-primary-solid); box-shadow:0 0 0 2px rgba(var(--accent-primary-rgb,0,120,240),0.15); background: var(--bg-elevated,#fff); }
+.group input[type="text"]::placeholder { color:var(--text-secondary); opacity:.6; }
+.group select {
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+/* Inline checkbox pill */
+.checkboxLabel { display:inline-flex; align-items:center; gap:.5rem; font-size:.75rem; cursor:pointer; user-select:none; background: var(--bg-content); border:1px solid var(--border-color); padding:.55rem .9rem; border-radius:999px; transition: background var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed); line-height:1; }
+.checkboxLabel input { accent-color: var(--accent-primary-solid); width:14px; height:14px; }
+.checkboxLabel:hover { border-color: var(--accent-primary-solid); }
+.checkboxLabel:has(input:focus-visible) { outline:none; box-shadow:0 0 0 2px rgba(var(--accent-primary-rgb,0,120,240),0.15); }
+
+/* Clear button */
+.clearBtn { background:none; border:none; color: var(--accent-primary-solid); cursor:pointer; font-size:.7rem; padding:.45rem .75rem; border-radius: var(--border-radius-sm); transition: background var(--transition-speed); }
+.clearBtn:hover { background: rgba(0,0,0,0.05); }
+
+/* Responsive adjustments: keep desktop layout stable until 640px */
+@media (max-width:640px) {
+	.bar { flex-direction:column; align-items:stretch; padding:.75rem 0 0; gap:.9rem; }
+	.row { gap:.9rem; }
+	.group, .chipsGroup { width:100%; flex:0 0 auto; min-width:0; }
+	.group select, .group input[type="text"] { width:100%; min-width:0; box-sizing:border-box; max-width:100%; }
+	.checkboxLabel { width:100%; justify-content:flex-start; }
+	.chipsRow { flex-wrap:wrap; overflow-x:visible; }
+}
+
+/* Ensure chip section and clear button wrap beneath */
+.chipsRow + .clearBtn { flex-basis:100%; text-align:start; }
+.chipsRow { flex-wrap:wrap; }
+
+/* Access / favorites chips (mirrors SampleQuestions styles) */
+.chipsRow { display:flex; gap:.6rem; flex-wrap:nowrap; align-items:center; overflow-x:auto; scrollbar-width:none; }
+.chipsRow::-webkit-scrollbar { display:none; }
+.chipBtn { background: var(--bg-content); border:1px solid var(--border-color); color:var(--text-secondary); font-size:.7rem; padding:.45rem .9rem; border-radius:999px; cursor:pointer; line-height:1; display:inline-flex; align-items:center; gap:.4rem; transition: background var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed); white-space:nowrap; flex:0 0 auto; }
+.chipBtn:hover { border-color: var(--accent-primary-solid); }
+.chipBtnActive { background: var(--accent-primary-solid); color:#fff; border-color: var(--accent-primary-solid); box-shadow:0 2px 6px rgba(0,0,0,.15); }

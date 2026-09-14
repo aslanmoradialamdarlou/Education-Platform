@@ -1,0 +1,25 @@
+.section { width: 100%; padding: 48px 0;  background: radial-gradient(1200px 300px at 50% 0%, rgba(13,110,253,0.15), transparent 60%); border-top: 1px solid var(--border-color);} 
+.cta { padding: 56px 16px; width: 100%; max-width: 1200px; margin: 0 auto; font-family: 'Vazirmatn', sans-serif; }
+.wrap { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2rem; align-items: center; }
+.content { text-align: right; }
+.content h2 { font-size: clamp(1.3rem, 3.5vw, 2rem); margin: 0 0 .5rem; }
+.lead { color: var(--text-secondary); margin: 0 0 1rem; line-height: 1.9; }
+.steps { display: grid; gap: .5rem; padding: 0; margin: 0 0 1rem; list-style: none; }
+.step { display: flex; align-items: center; gap: .5rem; }
+.bullet { width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--bg-main); border: 1px solid var(--border-color); color: var(--accent-primary-solid); }
+.btn { margin-top: .25rem; font-family: 'Vazirmatn', sans-serif; }
+:global(.MuiButton-root).btn { font-family: 'Vazirmatn', sans-serif; }
+.media { display: flex; align-items: center; justify-content: center; }
+.image { width: clamp(260px, 36vw, 540px); display: block; border: 1px solid var(--border-color); box-shadow: 0 20px 50px rgba(0,0,0,.15); height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; background: var(--bg-content); }
+
+@media (max-width: 1024px) {
+  .wrap { grid-template-columns: minmax(0,1fr) auto; }
+}
+@media (max-width: 800px) {
+  .wrap { grid-template-columns: 1fr; gap: 1.25rem; }
+  .media { order: -1; }
+  .image { width: 100%; }
+}
+@media (max-width: 480px) {
+  .image { aspect-ratio: 4 / 3; }
+}

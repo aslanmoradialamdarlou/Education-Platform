@@ -1,0 +1,229 @@
+/* src/components/Login/Login.module.css */
+.loginPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--bg-main);
+}
+.loginBox {
+    width: 100%;
+    max-width: 450px;
+    background-color: var(--bg-content);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px var(--shadow-color);
+    margin: 1rem;
+    max-width: 540px;
+    transition: max-width 300ms ease, padding 300ms ease, width 300ms ease;
+}
+.logo {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-primary-solid);
+    margin-bottom: 1rem;
+}
+.title {
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+.tab {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    position: relative;
+    transition: color var(--transition-speed);
+}
+.tab:hover {
+    color: var(--text-primary);
+}
+.tab.active {
+    color: var(--accent-primary-solid);
+    font-weight: 500;
+}
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent-primary-solid);
+}
+.forgotPassword {
+    display: block;
+    text-align: left;
+    font-size: 0.9rem;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+}
+.submitBtn {
+    width: 100%;
+    background: var(--accent-primary-solid);
+    color: white;
+    border: none;
+    padding: 0.85rem;
+    border-radius: var(--border-radius-md);
+    font-family: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: opacity 180ms ease, transform 120ms ease, box-shadow 180ms ease;
+    will-change: opacity, transform;
+}
+.submitBtn:hover {
+    opacity: 0.95;
+}
+/* pressed/active state for tactile feedback */
+.submitBtn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.998);
+}
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+}
+.resendBtn {
+    display: flex;
+    ;
+    width: 100%;
+    text-align: start;
+    margin-top: 0.5rem;
+    /* background: linear-gradient(90deg, var(--accent-primary-solid, #1976d2) 60%, var(--accent-primary-light, #42a5f5) 100%); */
+    /* color: #fff; */
+    color: var(--accent-primary-solid);
+    border: none;
+    padding: 0.7rem 0.5rem;
+    border-radius: var(--border-radius-md, 8px);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+    transition: background 0.18s, opacity 0.18s, box-shadow 0.18s;
+    outline: none;
+    transition: background 180ms ease, opacity 180ms ease, box-shadow 180ms ease, transform 120ms ease;
+    will-change: opacity, transform;
+}
+.resendBtn:hover:not(:disabled) {
+    opacity: 0.92;
+    /* box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13); */
+}
+.resendBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #e0e0e0;
+    color: #888;
+    box-shadow: none;
+}
+.resendBtn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.998);
+}
+
+.resendBtn {
+    display: flex;
+    ;
+    width: 100%;
+    text-align: start;
+    margin-top: 0.5rem;
+    /* background: linear-gradient(90deg, var(--accent-primary-solid, #1976d2) 60%, var(--accent-primary-light, #42a5f5) 100%); */
+    /* color: #fff; */
+    color: var(--accent-primary-solid);
+    border: none;
+    padding: 0.7rem 0.5rem;
+    border-radius: var(--border-radius-md, 8px);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+    transition: background 0.18s, opacity 0.18s, box-shadow 0.18s;
+    outline: none;
+    letter-spacing: 0.01em;
+}
+.resendBtn:hover:not(:disabled) {
+    opacity: 0.92;
+    /* box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13); */
+}
+.resendBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #e0e0e0;
+    color: #888;
+    box-shadow: none;
+}
+
+/* Match signup responsive expansion */
+/* @media (max-width: 720px) {
+    .loginBox {
+        padding: 1.25rem;
+        margin: 0.6rem;
+        max-width: 420px;
+    }
+}
+@media (min-width: 721px) and (max-width: 1100px) {
+    .loginBox { width: calc(100% - 80px); max-width: 820px; }
+}
+@media (min-width: 1100px) {
+    .loginBox { width: calc(100% - 160px); max-width: 900px; padding: 2.75rem; }
+}
+@media (min-width: 1400px) {
+    .loginBox { max-width: 1100px; width: calc(100% - 200px); }
+} */
+
+.authSwitch {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+.authSwitch a { color: var(--accent-primary-solid); font-weight: 600; }
+.authSwitch a:hover { text-decoration: underline; }
+
+.guestLink {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.guestLink a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+.guestLink a:hover {
+    color: var(--text-primary);
+}
+
+.error {
+    color: var(--danger-color, #c53030);
+    background: rgba(197,48,48,0.04);
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid rgba(197,48,48,0.08);
+    font-size: 0.95rem;
+    margin-top: 0.75rem;
+}

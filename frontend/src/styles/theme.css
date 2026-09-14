@@ -1,0 +1,79 @@
+/* src/styles/theme.css (Updated Colors) */
+
+/* --- Advanced Theming Variables --- */
+:root {
+    --border-radius-lg: 20px;
+    --border-radius-md: 15px;
+    --transition-speed: 0.3s;
+    --hero-text-color: #fefefe; /* Using off-white */
+    --golden-color: #ffc107; /* Golden color */
+    --silver-color: #c0c0c0; /* Silver color */
+    --bronze-color: #cd7f32; /* Bronze color */
+}
+
+/* --- Grade 7 Theme (Purple) --- NEW --- */
+body[data-grade="7"] {
+    --accent-primary: linear-gradient(135deg, #8A2BE2, #A052E4);
+    --accent-primary-solid: #8A2BE2;
+    --bg-main: #f9f5fd;
+    --bg-content: #fefefe;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #e9d8f3;
+    --shadow-color: rgba(102, 90, 108, 0.1);
+}
+
+body[data-grade="7"].dark-mode {
+    --accent-primary: linear-gradient(135deg, #9d4edd, #b16ef0);
+    --accent-primary-solid: #9d4edd;
+    --bg-main: #16111a;
+    --bg-content: #251c2e;
+    --text-primary: #e9ecef;
+    --text-secondary: #adb5bd;
+    --border-color: #40344a;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Grade 8 Theme (Blue) --- ORIGINAL --- */
+body[data-grade="8"] {
+    --accent-primary: linear-gradient(135deg, #0d6efd, #4b94ff);
+    --accent-primary-solid: #0d6efd;
+    --bg-main: #f3f7fd;
+    --bg-content: #fefefe;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(90, 99, 108, 0.1);
+}
+body[data-grade="8"].dark-mode {
+    --accent-primary: linear-gradient(135deg, #4b94ff, #78b3ff);
+    --accent-primary-solid: #4b94ff;
+    --bg-main: #11151a;
+    --bg-content: #1c232e;
+    --text-primary: #e9ecef;
+    --text-secondary: #adb5bd;
+    --border-color: #343a40;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Grade 9 Theme (Green) --- ORIGINAL --- */
+body[data-grade="9"] {
+    --accent-primary: linear-gradient(135deg, #198754, #28a745);
+    --accent-primary-solid: #198754;
+    --bg-main: #f3f9f5;
+    --bg-content: #fefefe;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #d1e7dd;
+    --shadow-color: rgba(86, 102, 91, 0.1);
+}
+body[data-grade="9"].dark-mode {
+    --accent-primary: linear-gradient(135deg, #20c997, #28e0a8);
+    --accent-primary-solid: #20c997;
+    --bg-main: #101713;
+    --bg-content: #1b2620;
+    --text-primary: #e9ecef;
+    --text-secondary: #adb5bd;
+    --border-color: #343a40;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}

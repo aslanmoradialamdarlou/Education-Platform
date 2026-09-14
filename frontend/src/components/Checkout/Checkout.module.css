@@ -1,0 +1,229 @@
+/* src/components/Checkout/Checkout.module.css */
+.pageHeader {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: var(--bg-content);
+    border-bottom: 1px solid var(--border-color);
+}
+.pageTitle { font-size: 2.5rem; font-weight: 700; color: var(--text-primary); }
+.pageSubtitle { font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; }
+
+.checkoutLayout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    align-items: flex-start;
+}
+
+/* Aliases and additional classnames used by the new CheckoutPage component */
+.page { background: var(--bg-main); color: var(--text-primary); }
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+.headerBlock { margin-bottom: 22px; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 18px; }
+.title { font-size: 28px; font-weight: 800; margin: 0; }
+.subtitle { color: var(--text-secondary); margin-top: 6px; }
+
+.grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
+.leftColumn { padding: 0; }
+.rightColumn { position: sticky; top: 110px; }
+
+.card { background: var(--bg-content); border-radius: 12px; padding: 16px; border: 1px solid var(--border-color); }
+.cardTitle { font-weight: 700; margin: 0 0 10px 0; }
+
+.discountRow { display: flex; gap: 10px; align-items: center; }
+.input { flex: 1; background: var(--bg-main); border: 1px solid var(--border-color); color: var(--text-primary); padding: 10px 12px; border-radius: 8px; }
+.input:focus { outline: none; border-color: var(--accent-primary-solid); box-shadow: 0 0 0 6px rgba(187,134,252,0.06); }
+.applyBtn {
+    background: var(--bg-content);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.applyBtn:hover {
+    background: color-mix(in srgb, var(--accent-primary-solid) 8%, var(--bg-content) 92%);
+    color: var(--accent-primary-solid);
+}
+.applyMsg { margin-top: 8px; color: var(--text-secondary); }
+
+.gatewayList { display: flex; flex-direction: column; gap: 10px; }
+.gatewayItem { display: grid; grid-template-columns: 1fr 48px 32px; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); cursor: pointer; background: transparent; }
+.gatewayItem input[type="radio"] { display: none; }
+.gatewayName { font-weight: 600; color: var(--text-primary); }
+.gatewayLogo { filter: invert(1) brightness(2); width: 48px; height: 28px; border-radius: 6px; overflow: hidden; }
+.radioVisual { display: flex; justify-content: center; }
+.radioOuter { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border-color); display: inline-flex; align-items: center; justify-content: center; }
+.radioInner { width: 10px; height: 10px; border-radius: 50%; background: var(--accent-primary-solid); }
+.gatewayItem.selected { border-color: var(--accent-primary-solid); background: var(--accent-primary-faded); }
+
+/* Summary Card */
+.summaryCard {
+    padding: 1.5rem;
+    background-color: var(--bg-content) !important;
+    border-radius: var(--border-radius-lg) !important;
+}
+ .summaryHeader h4 { margin: 0; font-weight: 700; border-bottom: 2px solid var(--accent-primary-solid); padding-bottom: 8px; }
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.75rem 0;
+    color: var(--text-secondary);
+}
+.discountAmount {
+    color: var(--success-color);
+}
+.totalRow {
+    color: var(--text-primary) !important;
+    font-weight: 700;
+}
+
+.priceList { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.row { display: flex; justify-content: space-between; color: var(--text-secondary); }
+.discountVal { color: var(--success-color); }
+.divider { border-bottom: 1px dashed var(--border-color); margin: 8px 0; }
+.totalRow { display: flex; justify-content: space-between; font-weight: 800; font-size: 18px; color: var(--text-primary); }
+.totalPrice { font-size: 20px; }
+
+/* Plan Details Styles */
+.planDetails {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+.tokenBenefit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--accent-primary-faded);
+    color: var(--accent-primary-solid);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.featureList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.featureList li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.featureList svg {
+    color: var(--success-color);
+    flex-shrink: 0;
+}
+
+.featuresCard { margin-top: 14px; background: var(--bg-main); border-radius: 10px; padding: 10px; border: 1px solid var(--border-color); }
+.tokenBadge { display: inline-flex; gap: 8px; align-items: center; padding: 6px 10px; background: var(--accent-primary-faded); color: var(--accent-primary-solid); border-radius: 999px; font-weight: 600; }
+.featuresList { list-style: none; padding: 10px 0 0 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.featuresList li { color: var(--text-secondary); display: flex; gap: 8px; align-items: center; }
+.checkIcon { color: var(--success-color); }
+
+/* Actions */
+.actionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.actionCard {
+    padding: 1.5rem;
+    background-color: var(--bg-content) !important;
+    border-radius: var(--border-radius-lg) !important;
+}
+.discountInputGroup {
+    display: flex;
+    gap: 0.5rem;
+}
+.gatewayList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.gatewayOption {
+    width: 100%;
+    padding: 1rem;
+    margin: 0 !important;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md) !important;
+    background-color: var(--bg-main);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+.gatewayOption:hover {
+    border-color: var(--accent-primary-solid);
+}
+.gatewayOption.Mui-checked {
+    border-color: var(--accent-primary-solid);
+    background-color: color-mix(in srgb, var(--accent-primary-solid) 10%, transparent);
+    box-shadow: 0 0 0 2px var(--accent-primary-solid);
+}
+.gatewayOption img {
+    height: 30px;
+    object-fit: contain;
+    width: 100%;
+}
+
+.paymentButton {
+    width: 100%;
+    padding: 1rem !important;
+    font-size: 1.1rem !important;
+}
+
+.btnPrimary { background-color: var(--accent-primary-solid) !important; font-family: 'Vazirmatn', sans-serif !important; }
+.btnSecondary { border-color: var(--border-color) !important; color: var(--text-primary) !important; font-family: 'Vazirmatn', sans-serif !important; }
+
+/* Pay row & button */
+.payRow { display: flex; justify-content: flex-end; margin: 24px 0; }
+.payWrapper { width: 360px; }
+.payBtn {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: white;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent-primary-solid) 85%, black 5%), var(--accent-primary-solid));
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(11,8,32,0.35);
+    cursor: pointer;
+    transition: transform 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Vazirmatn', sans-serif;
+}
+.payBtn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(11,8,32,0.45); }
+.payBtn:active:not(:disabled) { transform: translateY(0); }
+.payBtn[disabled] { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
+
+@media (max-width: 768px) {
+    .payWrapper { width: 100%; }
+    .payRow { justify-content: center; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .checkoutLayout {
+        grid-template-columns: 1fr;
+    }
+    .summaryCard {
+        grid-row: 2;
+    }
+    .grid { grid-template-columns: 1fr; }
+    .rightColumn { position: static; order: -1; }
+    .payRow { justify-content: center; }
+    .payWrapper { width: 100%; }
+}

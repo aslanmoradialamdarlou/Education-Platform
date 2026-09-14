@@ -1,0 +1,23 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 18px;
+  background: var(--bg-content, #fff);
+  color: var(--text-primary, #111);
+  border: 1px solid var(--border-color, #e6e6e6);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  font-size: 14px;
+  margin: 4px;
+}
+.chip:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(16,24,40,0.08);
+  background-color: var(--bg-content);
+}
+.chip:active { transform: translateY(-1px) scale(0.998); }
+.chip:focus { outline: 2px solid var(--accent-primary-solid); }
+.icon { display: inline-flex; align-items: center; justify-content: center; }
+.label { white-space: nowrap; }

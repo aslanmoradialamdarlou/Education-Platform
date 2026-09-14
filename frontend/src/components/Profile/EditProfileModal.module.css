@@ -1,0 +1,19 @@
+/* src/components/Profile/EditProfileModal.module.css */
+.modalOverlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); z-index: 1200; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modalContent { background-color: var(--bg-content); border-radius: var(--border-radius-lg); width: 100%; max-width: 600px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); animation: slideUp 0.3s ease; }
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modalHeader { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); }
+.modalHeader h3 { font-size: 1.25rem; color: var(--text-primary); }
+.closeButton { background: none; border: none; color: var(--text-secondary); cursor: pointer; }
+.editForm { padding: 1.5rem; }
+.formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.formGroup { display: flex; flex-direction: column; }
+.formGroup label { margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+.formGroup input, .formGroup select { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); background-color: var(--bg-main); border-radius: var(--border-radius-md); font-family: inherit; color: var(--text-primary); }
+.formGroup input:focus, .formGroup select:focus { outline: none; border-color: var(--accent-primary-solid); }
+.formActions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); }
+.cancelBtn { background-color: var(--bg-main); color: var(--text-primary); border: 1px solid var(--border-color); }
+.saveBtn { background-color: var(--accent-primary-solid); color: white; border: none; }
+.cancelBtn, .saveBtn { padding: 0.75rem 1.5rem; border-radius: var(--border-radius-md); font-family: inherit; font-size: 1rem; cursor: pointer; transition: opacity var(--transition-speed); }
+.cancelBtn:hover, .saveBtn:hover { opacity: 0.9; }

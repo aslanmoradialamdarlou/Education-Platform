@@ -1,0 +1,135 @@
+/* Scoped styles for Tokens & Wallet tab */
+.walletGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Slightly relax min width on very small devices to avoid brutal overflow */
+@media (max-width: 420px){
+  .walletGrid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+}
+
+.walletRowNoWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  height: max-content;
+  flex-wrap: nowrap; /* allow wrapping on small screens */
+}
+
+/* Keep both buttons together as a unit so they wrap together */
+.buttonGroup {
+  display: inline-flex;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+  align-self: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Optional: tighten gaps a bit on smaller screens */
+@media (max-width: 900px){
+  .walletRowNoWrap { gap: 0.4rem; }
+  .buttonGroup { gap: 0.4rem; }
+}
+@media (max-width: 640px){
+  .walletRowNoWrap { gap: 0.35rem; }
+  .buttonGroup { gap: 0.35rem; }
+}
+/* @media (max-width: 720px){
+  .walletRowNoWrap { gap: 0.35rem; }
+  .buttonGroup { gap: 0.35rem; }
+} */
+
+/* Scoped input wrapper to match search bars */
+.inputWrap {
+  position: relative;
+  width: 100%;
+  height: 40px;;
+  min-width: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 10000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.inputWrap span {
+  position: absolute;
+  right: 1rem;
+  top: 0.45rem;
+  border: none;
+  outline: none;
+  /* top: 50%; */
+  opacity: .7;
+  pointer-events: none;
+}
+.inputWrap input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding-inline-start: 2.3rem;
+    height: 36px;
+}
+
+/* Module-scoped buttons (manual styling) */
+.btn {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: var(--btn-radius-md, 8px);
+  padding: .55rem .9rem;
+  font-size: var(--btn-font-size-sm, .85rem);
+  line-height: 1.2;
+  background: var(--bg-content);
+  color: var(--text-primary);
+  transition: background .2s, border-color .2s, color .2s, transform .15s, box-shadow .2s;
+}
+.btn:active { transform: translateY(1px); }
+
+.btnPrimary {
+  background: var(--accent-primary-solid);
+  color: #fff;
+  border-color: var(--accent-primary-solid);
+}
+.btnPrimary:hover { opacity: .9; }
+
+.btnOutlineDanger {
+  background: transparent;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+.btnOutlineDanger:hover {
+  background: rgba(220,53,69,0.06);
+  /* animation: dangerPulse 900ms ease-in-out infinite alternate; */
+}
+
+/* @keyframes dangerPulse {
+  from { box-shadow: 0 0 0 0 rgba(220,53,69,0.0); }
+  to { box-shadow: 0 0 0 6px rgba(220,53,69,0.12); }
+} */
+@media (prefers-reduced-motion: reduce){
+  .btnOutlineDanger:hover { animation: none; }
+}
+
+/* Stacked layout: input full width; buttons always below */
+.stackedActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem; /* close to .actionInputGroup gap */
+  margin-top: 0.5rem; /* match .actionInputGroup spacing */
+  align-items: stretch; /* ensure input takes full width */
+}
+@media (max-width: 900px){
+  .stackedActions { gap: 0.5rem; }
+}
+@media (max-width: 640px){
+  .stackedActions { gap: 0.45rem; }
+}

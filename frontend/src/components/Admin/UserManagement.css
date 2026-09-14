@@ -1,0 +1,163 @@
+/* User Management tab specific styles (scoped under .userMgmt) */
+.userMgmt .filterGrid { display:grid; grid-template-columns: repeat(2, minmax(180px,1fr)); gap:.6rem; }
+.userMgmt .filterGrid .full-span { grid-column: 1 / -1; }
+.userMgmt .resultsBadge { font-size:.65rem; color: var(--text-secondary); border:1px solid var(--border-color); padding:.3rem .6rem; border-radius: 999px; }
+
+/* Drawer (overlay + panel) */
+.userMgmt .drawerRoot { position: fixed; inset: 0; z-index: 3100; }
+.userMgmt .drawerOverlay { position: absolute; inset: 0; background: rgba(0,0,0,.45); z-index: 0; opacity: 0; transition: opacity .3s ease; }
+.userMgmt .drawerRoot.open .drawerOverlay { opacity: 1; }
+.userMgmt .drawerPanel { position: absolute; top: 0; bottom: 0; right: 0; width: min(92vw, 780px); max-width: 780px; background: var(--bg-content); border-left: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,.18); transform: translateX(100%); transition: transform .3s ease; display:flex; flex-direction:column; z-index: 1; will-change: transform; }
+.userMgmt .drawerPanel.open { transform: translateX(0); }
+.userMgmt .drawerInner { height: 100%; display: flex; flex-direction: column; padding: .9rem .9rem 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.userMgmt .drawerSection { padding: .75rem; }
+.userMgmt .drawerSection.scroll-y { overflow: visible; }
+.userMgmt .drawerInner > .drawerSection:first-child { position: sticky; top: 0; background: var(--bg-content); z-index: 2; border-bottom: 1px solid var(--border-color); }
+.userMgmt .divider { height:1px; background: var(--border-color); border:0; margin: .25rem 0; }
+
+/* Drawer filters and inputs (Sample Questions-like pills) */
+.userMgmt .drawerFilters .filterGroup { display:flex; flex-direction:column; gap:.35rem; min-width: 160px; position: relative; }
+.userMgmt .drawerFilters .filterGroup label { font-size:.8rem; color:var(--text-secondary); margin-right:8px; }
+.userMgmt .drawerFilters .filterGroup select,
+.userMgmt .drawerFilters .filterGroup input[type="text"],
+.userMgmt .drawerFilters .filterGroup input[type="date"],
+.userMgmt .drawerFilters .filterGroup input[type="email"],
+.userMgmt .drawerFilters .filterGroup input[type="tel"],
+.userMgmt .drawerFilters .filterGroup input[type="password"],
+.userMgmt .drawerFilters .filterGroup input[type="number"] {
+  background: var(--bg-content);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  min-width: 180px;
+  line-height: 1.2;
+  appearance: none;
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background var(--transition-speed);
+}
+.userMgmt .drawerFilters .filterGroup input[type="text"]::placeholder,
+.userMgmt .drawerFilters .filterGroup input[type="email"]::placeholder,
+.userMgmt .drawerFilters .filterGroup input[type="tel"]::placeholder,
+.userMgmt .drawerFilters .filterGroup input[type="password"]::placeholder,
+.userMgmt .drawerFilters .filterGroup input[type="number"]::placeholder {
+  color: var(--text-secondary);
+  opacity: .6;
+}
+.userMgmt .drawerFilters .filterGroup select:focus,
+.userMgmt .drawerFilters .filterGroup input[type="text"]:focus,
+.userMgmt .drawerFilters .filterGroup input[type="date"]:focus,
+.userMgmt .drawerFilters .filterGroup input[type="email"]:focus,
+.userMgmt .drawerFilters .filterGroup input[type="tel"]:focus,
+.userMgmt .drawerFilters .filterGroup input[type="password"]:focus,
+.userMgmt .drawerFilters .filterGroup input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent-primary-solid);
+  box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb, 0,120,240), 0.15);
+  background: var(--bg-elevated, #fff);
+}
+/* Remove default number input spinners */
+.userMgmt .drawerFilters .filterGroup input[type="number"]::-webkit-outer-spin-button,
+.userMgmt .drawerFilters .filterGroup input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.userMgmt .drawerFilters .filterGroup input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+
+.userMgmt .drawerFilters .clearBtn { background:none; border:none; color:var(--accent-primary-solid); cursor:pointer; font-size:.8rem; padding:.4rem .6rem; border-radius: var(--border-radius-sm); }
+.userMgmt .drawerFilters .clearBtn:hover { background: rgba(0,0,0,0.05); }
+
+/* Pagination row */
+.userMgmt .paginationRow { display:block; }
+.userMgmt .paginationRow .rowsSelect { background: var(--bg-content); border:1px solid var(--border-color); border-radius:999px; padding:.4rem .6rem; font-size:.75rem; color:var(--text-primary); }
+.userMgmt .paginationRow .rowsSelect:focus { outline:none; border-color: var(--accent-primary-solid); box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb,0,120,240),.15); }
+
+/* Enable container queries and card layout breakpoint for table */
+.userMgmt .userTableContainer { container-type: inline-size; container-name: usersTable; }
+
+/* Default card layout fallback at very small widths (safety) */
+@container usersTable (max-width: 860px) {
+  .userMgmt .userTableContainer thead { display: none; }
+  .userMgmt .userTableContainer table { border: 0; }
+  .userMgmt .userTableContainer tr { display: block; margin-bottom: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); overflow: hidden; padding: 0.5rem; background: var(--bg-content); }
+  /* Card row cells use grid: label (right) + value (left) */
+  .userMgmt .userTableContainer td { display: grid !important; grid-template-columns: minmax(7rem, auto) 1fr; align-items: center; gap: .75rem; text-align: left !important; padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--bg-main); }
+  .userMgmt .userTableContainer td:last-child { border-bottom: 0; }
+  .userMgmt .userTableContainer td::before { content: attr(data-label); grid-column: 1; text-align: right; font-weight: 500; color: var(--text-primary); }
+  .userMgmt .userTableContainer td > * { grid-column: 2; text-align: left !important; justify-self: left !important; }
+  .userMgmt .userTableContainer td.showInCard { display: grid !important; }
+  .userMgmt .userTableContainer td[data-label] { display: grid !important; }
+}
+
+@supports not (container-type: inline-size) {
+  @media (max-width: 900px){
+    .userMgmt .userTableContainer thead { display: none; }
+    .userMgmt .userTableContainer table { border: 0; }
+    .userMgmt .userTableContainer tr { display: block; margin-bottom: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); overflow: hidden; padding: 0.5rem; background: var(--bg-content); }
+    .userMgmt .userTableContainer td { display: grid !important; grid-template-columns: minmax(7rem, auto) 1fr; align-items: center; gap: .75rem; text-align: left !important; padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--bg-main); }
+    .userMgmt .userTableContainer td:last-child { border-bottom: 0; }
+    .userMgmt .userTableContainer td::before { content: attr(data-label); grid-column: 1; text-align: right; font-weight: 500; color: var(--text-primary); }
+    .userMgmt .userTableContainer td > * { grid-column: 2; text-align: left !important; justify-self: left !important; }
+    .userMgmt .userTableContainer td.showInCard { display: grid !important; }
+    .userMgmt .userTableContainer td[data-label] { display: grid !important; }
+  }
+}
+
+/* Additional viewport safety for <=768px explicit */
+@media (max-width: 768px) {
+  .userMgmt .userTableContainer thead { display: none; }
+  .userMgmt .userTableContainer table { border: 0; }
+  .userMgmt .userTableContainer tr { display: block; margin-bottom: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); overflow: hidden; padding: 0.5rem; background: var(--bg-content); }
+  .userMgmt .userTableContainer td { display: grid !important; grid-template-columns: minmax(7rem, auto) 1fr; align-items: center; gap: .75rem; text-align: left !important; padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--bg-main); }
+  .userMgmt .userTableContainer td:last-child { border-bottom: 0; }
+  .userMgmt .userTableContainer td::before { content: attr(data-label); grid-column: 1; text-align: right; font-weight: 500; color: var(--text-primary); }
+  .userMgmt .userTableContainer td > * { grid-column: 2; text-align: left !important; justify-self: left !important; }
+  .userMgmt .userTableContainer td.showInCard { display: grid !important; }
+  .userMgmt .userTableContainer td[data-label] { display: grid !important; }
+}
+
+@media (max-width:680px){
+  .userMgmt .drawerPanel { width: 96vw; }
+  .userMgmt .filterGrid { grid-template-columns: 1fr; }
+}
+
+/* Consistent colors for action buttons */
+.userMgmt .actionBtn.edit { color: #0d6efd; }
+.userMgmt .actionBtn.activate { color: #198754; }
+.userMgmt .actionBtn.suspend { color: #ffc107; }
+.userMgmt .actionBtn.delete { color: #dc3545; }
+.userMgmt .actionBtn:hover { background: var(--bg-main); }
+
+/* Lightweight avatar/badge replacements */
+.userMgmt .avatar-md { width: 32px; height: 32px; border-radius: 9999px; background: var(--bg-main); color: var(--text-secondary); display: inline-flex; align-items: center; justify-content: center; font-weight: 600; }
+.userMgmt .badge { display:inline-flex; align-items:center; font-size: var(--chip-font-size, .6rem); padding: var(--chip-padding-y, .3rem) var(--chip-padding-x, .6rem); border-radius: 999px; border: 1px solid var(--border-color); color: var(--text-secondary); background: var(--bg-content); line-height:1; }
+.userMgmt .badge.sub-active { background: #198754; color: #fff; border-color: #198754; }
+.userMgmt .badge.sub-none { background: var(--bg-content); color: var(--text-secondary); }
+.userMgmt .badge.role-teacher { background: #6f42c1; color: #fff; border-color: #6f42c1; }
+.userMgmt .badge.role-student { background: var(--bg-content); color: var(--text-secondary); }
+
+/* Native table base styles */
+.userMgmt .userTableContainer table { width: 100%; border-collapse: collapse; background: var(--bg-content); }
+.userMgmt .userTableContainer thead th { text-align: right; padding: .75rem .5rem; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-size: .85rem; }
+.userMgmt .userTableContainer tbody td { padding: .75rem .5rem; border-bottom: 1px solid var(--bg-main); text-align: right; }
+.userMgmt .userTableContainer tbody tr:hover { background: var(--bg-main); }
+
+/* Additional viewport safety for <=768px */
+@media (max-width: 768px) {
+  .userMgmt .userTableContainer thead { display: none; }
+  .userMgmt .userTableContainer table { border: 0; }
+  .userMgmt .userTableContainer tr { display: block; margin-bottom: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); overflow: hidden; padding: 0.5rem; background: var(--bg-content); }
+  .userMgmt .userTableContainer td { display: grid !important; grid-template-columns: minmax(7rem, auto) 1fr; align-items: center; gap: .75rem; text-align: left !important; padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--bg-main); }
+  .userMgmt .userTableContainer td:last-child { border-bottom: 0; }
+  .userMgmt .userTableContainer td::before { content: attr(data-label); grid-column: 1; text-align: right; font-weight: 500; color: var(--text-primary); }
+  .userMgmt .userTableContainer td > * { grid-column: 2; text-align: left !important; justify-self: left !important; }
+  .userMgmt .userTableContainer td.showInCard { display: grid !important; }
+  .userMgmt .userTableContainer td[data-label] { display: grid !important; }
+  .userMgmt .userTableContainer td.hideOnMobile { display: grid !important; }
+}
+/* 
+.clickableRow .item-center {
+    cursor: pointer;
+    display: flex;
+    align-items: end;;
+} */
+
+.userMgmt .userTableContainer .cellValue { text-align: right; justify-self: right; }

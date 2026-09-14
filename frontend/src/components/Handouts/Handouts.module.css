@@ -1,0 +1,455 @@
+/* src/components/Handouts/Handouts.module.css */
+.pageContainer { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; }
+.pageHeader { text-align: center; margin-bottom: 2.5rem; }
+.pageHeader h1 { 
+    /* Responsive size similar to Sample Questions: scales down on smaller screens */
+    font-size: clamp(1.3rem, 5.2vw, 2.2rem);
+    margin-bottom: 0.5rem; 
+}
+.pageHeader p { font-size: 1.1rem; color: var(--text-secondary); }
+.handoutsGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+
+/* Handout Card */
+.handoutCard { 
+    background-color: var(--bg-content); 
+    border: 1px solid var(--border-color); 
+    border-radius: var(--border-radius-lg); 
+    display: flex; 
+    flex-direction: column; 
+    transition: all var(--transition-speed);
+    position: relative; /* For hover actions positioning */
+}
+.handoutCard:hover { transform: translateY(-5px); box-shadow: 0 8px 20px var(--shadow-color); }
+
+/* Hover Actions Buttons */
+.hoverActions {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    gap: .4rem;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity var(--transition-speed), transform var(--transition-speed);
+    z-index: 3;
+}
+.handoutCard:hover .hoverActions { opacity: 1; transform: translateY(0); }
+
+.hovBtn {
+    background: var(--bg-elevated, var(--bg-content));
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--border-color);
+    width: 32px; 
+    height: 32px;
+    border-radius: 8px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: background var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+.hovBtn:hover {
+    background: color-mix(in oklab, var(--accent-primary-solid) 12%, var(--bg-elevated, var(--bg-content)));
+    color: var(--accent-primary-solid);
+    border-color: var(--accent-primary-solid);
+}
+.favActive { 
+    border-color: var(--accent-primary-solid); 
+    color: var(--accent-primary-solid); 
+}
+.favActive:hover { 
+    color: var(--accent-primary-solid); 
+    background: color-mix(in oklab, var(--accent-primary-solid) 10%, transparent); 
+}
+.studyActive { 
+    border-color: var(--accent-primary-solid); 
+    color: var(--accent-primary-solid); 
+}
+.studyActive:hover { 
+    background: color-mix(in oklab, var(--accent-primary-solid) 10%, transparent); 
+    color: var(--accent-primary-solid); 
+}
+
+/* Mobile visibility for hover actions */
+@media (hover: none) and (pointer: coarse) {
+    .hoverActions { opacity: 1; transform: none; }
+}
+@media (max-width: 640px) {
+    .hoverActions { opacity: 1; transform: none; }
+}
+
+/* Lock icon and token badge */
+.lockIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.tokenBadge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: white;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.cardIcon { color: var(--accent-primary-solid); padding: 1.5rem 1.5rem 0 1.5rem; }
+.cardContent { padding: 1rem 1.5rem; flex-grow: 1; }
+.cardTags { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+.chapterTag, .gradeTag { font-size: 0.8rem; padding: 0.2rem 0.6rem; border-radius: 15px; background-color: var(--bg-main); border: 1px solid var(--border-color); }
+.gradeTag { font-weight: 500; }
+/* Use the exact Questions palette and add a subtle background tint for clarity */
+.gradeTag[data-grade="7"] { color: #1e88e5; border-color: #1e88e5; background-color: color-mix(in oklab, #1e88e5 10%, transparent); }
+.gradeTag[data-grade="8"] { color: #8e24aa; border-color: #8e24aa; background-color: color-mix(in oklab, #8e24aa 10%, transparent); }
+.gradeTag[data-grade="9"] { color: #f4511e; border-color: #f4511e; background-color: color-mix(in oklab, #f4511e 10%, transparent); }
+.cardTitle { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+.cardMeta { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem; }
+.cardFooter { padding: 1.5rem; border-top: 1px solid var(--border-color); }
+.btn { width: 100%; padding: 0.75rem; border-radius: var(--border-radius-md); font-family: inherit; font-size: 1rem; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.btnDownload { background-color: var(--accent-primary-solid); color: #fefefe; }
+.btnSubscribe { background-color: #ffc107; color: #212529; }
+
+/* Filter Sidebar */
+.filterSidebar { background-color: var(--bg-content); border-radius: var(--border-radius-md); border: 1px solid var(--border-color); align-self: start; position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; }
+.sidebarContent { padding: 0; }
+.sidebarHeader { display: none; }
+.filterBackdrop { display: none; }
+.filterPanel { background-color: transparent !important; box-shadow: none !important; border-bottom: 1px solid var(--border-color); color: var(--text-primary) !important; }
+.filterPanel:last-child { border-bottom: none; }
+.filterPanel span { font-family: 'Vazirmatn', sans-serif !important; }
+/* Removed old aggregated chip container; per-grade chips now appear beneath each select */
+.chipContainer { display:none; }
+.filterChip { font-family: 'Vazirmatn', sans-serif !important; color: var(--text-primary) !important; }
+.filterChip[data-grade="7"] { border: 1px solid #8A2BE2 !important; background-color: rgba(138, 43, 226, 0.1) !important; }
+.filterChip[data-grade="8"] { border: 1px solid #0d6efd !important; background-color: rgba(13, 110, 253, 0.1) !important; }
+.filterChip[data-grade="9"] { border: 1px solid #198754 !important; background-color: rgba(25, 135, 84, 0.1) !important; }
+.filterChip svg { color: var(--text-secondary) !important; margin-right: 8px !important; }
+/* Remove floating filter trigger; use toolbar button instead */
+.mobileFilterTrigger { display: none; }
+/* Backdrop for mobile sidebar (referenced in HandoutsPage) */
+.mobileSidebarBackdrop { display:none; }
+@media (max-width: 992px) {
+    /* Show toolbar filter button on small screens */
+    .toolbarBtn { display:inline-flex; }
+    .pageContainer { grid-template-columns: 1fr; }
+    .filterSidebar { position: fixed; top: 0; right: 0; width: 320px; height: 100%; z-index: 2000; transform: translateX(100%); transition: transform 0.3s ease-in-out; max-height: 100vh; display: flex; flex-direction: column; border-radius: var(--border-radius-md) 0 0 var(--border-radius-md); }
+    .filterSidebar.isOpen { transform: translateX(0); }
+    .sidebarHeader { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+    .sidebarHeader button { background: transparent; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+    .sidebarContent { overflow-y: auto; flex-grow: 1; }
+    .mobileFilterTrigger { display: none; }
+    .mobileSidebarBackdrop { display:none; }
+    .filterBackdrop { display:block; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 1500; }
+}
+
+/* Toolbar button */
+.toolbarBtn { display:none; align-items:center; gap:.4rem; border:1px solid var(--border-color); background:var(--bg-content); color:var(--text-primary); padding:.5rem .8rem; border-radius: var(--border-radius-md); cursor:pointer; }
+.toolbarBtn:hover { border-color: var(--accent-primary-solid); }
+
+/* Ensure on small screens the toolbar button is visible (override comes after base rule) */
+@media (max-width: 992px) {
+    .toolbarBtn { display:inline-flex; }
+}
+
+/* Active filter chips (consistency with Videos) */
+.activeFiltersChipsRow { display:block; padding: 0 0 0.5rem 0; }
+.appliedFiltersHeader { font-size:.65rem; font-weight:600; letter-spacing:.5px; color:var(--text-secondary); margin-bottom:.35rem; }
+.chipsRow { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; }
+.chipBtn { background: var(--bg-content); border:1px solid var(--border-color); color:var(--text-secondary); font-size:.7rem; padding:.45rem .9rem; border-radius:999px; cursor:pointer; line-height:1; display:inline-flex; align-items:center; gap:.4rem; transition: background var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed); }
+.chipBtn:hover { border-color: var(--accent-primary-solid); }
+.removableChip { position:relative; padding-right:1.6rem; }
+.removableChip button { position:absolute; top:50%; right:.4rem; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:var(--text-secondary); font-size:.9rem; line-height:1; padding:0; }
+.removableChip button:hover { color:var(--accent-primary-solid); }
+.clearBtn { background:none; border:none; color:var(--accent-primary-solid); cursor:pointer; font-size:.8rem; padding:.4rem .6rem; border-radius: var(--border-radius-sm); transition: background var(--transition-speed); }
+.clearBtn:hover { background: rgba(0,0,0,0.05); }
+
+/* Toolbar (parity with QuestionBank) */
+.toolbarRow { display:flex; gap:.6rem; align-items:center; margin:0 0 .75rem 0; flex-wrap:wrap; }
+.toolbarInput,
+.toolbarSelect {
+    appearance: none;
+    background: var(--bg-content);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-md);
+    padding: .55rem .7rem;
+    line-height: 1.2;
+    outline: none;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* --- Lightweight Collapsible (Accordion-like) for Handouts (parity with Questions) --- */
+.collapsible { border-bottom: 1px solid var(--border-color); background: transparent; }
+.collapsible:last-of-type { border-bottom: none; }
+.collapsibleHeader { width: 100%; background: none; border: none; cursor: pointer; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; font: inherit; color: var(--text-primary); text-align: right; }
+.collapsibleHeader:hover { background: var(--bg-main); }
+.collapsibleHeader:focus-visible { outline: 2px solid var(--accent-primary-solid); outline-offset: 2px; }
+.collapsibleIcon { transition: transform 280ms cubic-bezier(.4,.9,.3,1); color: var(--text-secondary); }
+.collapsibleOpen .collapsibleIcon { transform: rotate(180deg); }
+.collapsibleBody { overflow: hidden; max-height: 0; transition: max-height 300ms cubic-bezier(.4,.9,.3,1); background: var(--bg-content); }
+.collapsibleOpen .collapsibleBody { overflow: visible; }
+.collapsibleInner { padding: 0.75rem 1.25rem 1.25rem; gap: 1rem; display: flex; align-items: center; }
+
+/* --- Custom Radio/Checkbox Group --- */
+.radioGroup { display: flex; flex-direction: column; gap: .4rem; padding: .25rem 0 .5rem; }
+.radioItem { display: flex; align-items: center; gap: .55rem; cursor: pointer; font-size: .9rem; color: var(--text-secondary); position: relative; user-select: none; }
+.radioItem input { position: absolute; opacity: 0; pointer-events: none; }
+.radioVisual { width: 18px; height: 18px; border: 2px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 180ms ease, background 180ms ease; }
+.radioItem:hover .radioVisual { border-color: var(--accent-primary-solid); }
+.radioChecked .radioVisual { border-color: var(--accent-primary-solid); background: radial-gradient(circle at center, var(--accent-primary-solid) 45%, transparent 47%); }
+.radioItem span.label { color: var(--text-primary); }
+.radioChecked span.label { font-weight: 600; color: var(--accent-primary-solid); }
+
+/* Grade-specific accent coloring (EXACT palette as Questions sidebar) */
+.radioItem.grade7 .radioVisual { border-color: rgba(30,136,229,.55); }
+.radioItem.grade8 .radioVisual { border-color: rgba(142,36,170,.55); }
+.radioItem.grade9 .radioVisual { border-color: rgba(244,81,30,.55); }
+.radioItem.grade7.radioChecked .radioVisual { border-color: #1e88e5; background: radial-gradient(circle at center, #1e88e5 45%, transparent 47%); }
+.radioItem.grade8.radioChecked .radioVisual { border-color: #8e24aa; background: radial-gradient(circle at center, #8e24aa 45%, transparent 47%); }
+.radioItem.grade9.radioChecked .radioVisual { border-color: #f4511e; background: radial-gradient(circle at center, #f4511e 45%, transparent 47%); }
+.radioItem.grade7.radioChecked span.label { color: #1e88e5; }
+.radioItem.grade8.radioChecked span.label { color: #8e24aa; }
+.radioItem.grade9.radioChecked span.label { color: #f4511e; }
+
+/* --- Custom Select (native) matching Questions --- */
+.selectChapter { width: 100%; margin-top: .5rem; padding: .6rem .75rem; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-main); color: var(--text-primary); font: inherit; direction: rtl; max-height: 200px; overflow-y: auto; }
+.selectChapter:focus { outline: 2px solid var(--accent-primary-solid); outline-offset: 2px; }
+.selectChapter option { background: var(--bg-content); color: var(--text-primary); }
+/* Removed listbox-specific rule for select[size] to use native dropdown */
+.toolbarInput { flex: 1 1 260px; min-width: 240px; max-width: 560px; }
+.toolbarSelect { flex: 0 0 auto; }
+.toolbarInput:focus, .toolbarSelect:focus {
+    border-color: var(--accent-primary-solid);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent-primary-solid) 18%, transparent);
+}
+
+/* --- Inline Checkbox (consistent pill style) --- */
+.inlineCheckbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    height: 36px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--bg-content);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    transition: background var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+    line-height: 1;
+    color: var(--text-primary);
+}
+.inlineCheckbox input {
+    accent-color: var(--accent-primary-solid);
+    width: 16px;
+    height: 16px;
+}
+.inlineCheckbox:hover { border-color: var(--accent-primary-solid); }
+.inlineCheckbox:has(input:focus-visible) { outline: none; box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb,0,120,240),0.15); }
+.inlineCheckbox input:focus { outline: none; }
+/* Removed vertical spacing rule between stacked checkboxes to prevent unintended top margin
+    when checkboxes are displayed inline; spacing is handled by parent .collapsibleInner gap. */
+
+/* Neutral chip style already defined via .chipBtn / .removableChip earlier */
+
+.chapterFilterContainer { display: flex; flex-direction: column; align-items: flex-start; overflow: visible; }
+
+/* --- Preview Modal Styles --- */
+.previewOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.previewModal {
+    background: var(--bg-content);
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.previewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    gap: 1rem;
+}
+
+.previewHeader h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.previewClose {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+.previewClose:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.previewMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.previewDesc {
+    padding: 1.25rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.previewThumbs {
+    padding: 0 1.25rem 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.previewThumb {
+    width: 80px;
+    height: 100px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: var(--bg-surface);
+}
+
+.previewActions {
+    padding: 1.25rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.btnDownload, .btnSubscribe {
+    padding: 0.625rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.btnDownload {
+    background: var(--accent-primary-solid);
+    color: white;
+}
+
+.btnDownload:hover {
+    background: var(--accent-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb, 0, 120, 240), 0.3);
+}
+
+.btnSubscribe {
+    background: var(--accent-secondary-solid, #f59e0b);
+    color: white;
+}
+
+.btnSubscribe:hover {
+    background: var(--accent-secondary-hover, #d97706);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+    .previewModal {
+        max-width: 100%;
+        max-height: 95vh;
+        margin: 0;
+    }
+
+    .previewHeader h2 {
+        font-size: 1.1rem;
+    }
+
+    .previewMeta {
+        font-size: 0.8125rem;
+    }
+
+    .previewActions {
+        flex-direction: column;
+    }
+
+    .btnDownload, .btnSubscribe {
+        width: 100%;
+    }
+}

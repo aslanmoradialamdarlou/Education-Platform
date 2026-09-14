@@ -1,0 +1,14 @@
+.footer { background: var(--bg-content); color: var(--text-secondary); border-top: 1px solid var(--border-color); padding: 1.5rem 0; }
+.content { max-width: 1200px; margin: 0 auto; padding: 0 1rem; display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+.section h3, .section h4 { color: var(--text-primary); margin-bottom: .75rem; }
+.logo { font-weight: 800; }
+.linkList { list-style: none; padding: 0; margin: 0; }
+.linkList li { margin-bottom: .5rem; }
+.linkList a { color: var(--text-secondary); text-decoration: none; }
+.linkList a:hover { color: var(--accent-primary-solid); }
+.bottom { max-width: 1200px; margin: 0 auto; padding: 1rem 1rem 0; display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); }
+
+@media (max-width: 800px) {
+  .content { grid-template-columns: 1fr; }
+  .bottom { justify-content: center; text-align: center; }
+}

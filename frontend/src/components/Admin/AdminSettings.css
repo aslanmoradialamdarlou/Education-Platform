@@ -1,0 +1,220 @@
+/* Settings-specific styles (scoped to settings page) */
+
+.settingsCardGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.settingsCard { background: var(--bg-content); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg); padding: 1rem 1.1rem; }
+.settingsCardTitle { display: flex; align-items: center; gap: .75rem; color: var(--text-primary); margin-bottom: 1rem; font-weight: 700; font-size: 1.1rem; }
+
+/* Form grid inside a card */
+.settingsFormGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .6rem; width: 100%; max-width: 100%; }
+.settingsGroup { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+.settingsGroup label { font-size: .8rem; color: var(--text-secondary); margin-right: 8px; }
+
+/* Inputs */
+.settingsGroup select,
+.settingsGroup input[type="text"],
+.settingsGroup input[type="email"],
+.settingsGroup input[type="tel"],
+.settingsGroup input[type="number"],
+.settingsGroup input[type="date"],
+.settingsGroup textarea {
+  background: var(--bg-content);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  min-width: 0;
+  line-height: 1.2; width: 100%; max-width: 100%;
+  appearance: none;
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background var(--transition-speed);
+}
+.settingsGroup textarea { border-radius: 12px; min-height: 80px; resize: vertical; }
+.settingsGroup input::placeholder,
+.settingsGroup textarea::placeholder { color: var(--text-secondary); opacity: .7; }
+.settingsGroup select:focus,
+.settingsGroup input[type="text"]:focus,
+.settingsGroup input[type="email"]:focus,
+.settingsGroup input[type="tel"]:focus,
+.settingsGroup input[type="number"]:focus,
+.settingsGroup input[type="date"]:focus,
+.settingsGroup textarea:focus {
+  outline: none; border-color: var(--accent-primary-solid);
+  box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb, 0,120,240), 0.15);
+  background: var(--bg-content);
+}
+
+/* Utilities for settings */
+.settingsFull { grid-column: 1 / -1; }
+.settingsRow { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.settingsTextMuted { color: var(--text-secondary); font-size: .75rem; }
+
+/* Logo preview box */
+.settingsLogoBox { width: 56px; height: 56px; border-radius: 12px; background: var(--bg-main); border: 1px solid var(--border-color); display: inline-flex; align-items: center; justify-content: center; overflow: hidden; }
+.settingsLogoBox img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Subject card layout for content settings */
+.subjectCard {
+  border: 1px solid var(--border-color);
+  background: var(--bg-main);
+  padding: 0.6rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0; /* prevent overflow in grid layouts */
+}
+.subjectCardHeader {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* allow the name input and delete button to wrap on narrow screens */
+}
+.subjectNameInput {
+  flex: 1 1 220px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  min-width: 0; /* allow shrinking inside flex */
+}
+.subjectCardBody {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  width: 100%;
+}
+.subjectGradeCol { flex: 1 1 0; display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+.subjectGradeCol input { padding: 0.45rem 0.6rem; border-radius: 8px; width: 100%; box-sizing: border-box; }
+.subjectCard .small { font-size: 0.72rem; }
+
+/* Keep the large-screen multi-column layout for the majority of viewports.
+   Only switch to the stacked (column) layout on very narrow phones to avoid overflow. */
+@media (max-width: 360px) {
+  .subjectCardBody { flex-direction: column; }
+  .subjectCardHeader { gap: 0.35rem; }
+  .subjectNameInput { width: 100%; }
+  .subjectCard { padding: 0.5rem; }
+}
+
+@media (max-width: 280px) {
+  .subjectNameInput { padding: 0.45rem; }
+  .subjectGradeCol input { padding: 0.4rem; }
+  .subjectCardHeader { align-items: flex-start; }
+}
+
+/* Token package card styles mirror subject cards but simpler (2 fields) */
+.tokenCard {
+  border: 1px solid var(--border-color);
+  background: var(--bg-main);
+  padding: 0.6rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.tokenCardHeader { display: flex; gap: 0.5rem; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.tokenNameInput { flex: 1 1 220px; padding: 0.5rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); background: transparent; min-width: 0; }
+.tokenCardBody { display: flex; gap: 0.5rem; align-items: flex-start; width: 100%; }
+.tokenField { flex: 1 1 0; display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+.tokenField input { padding: 0.45rem 0.6rem; border-radius: 8px; width: 100%; box-sizing: border-box; }
+.tokenCard .small { font-size: 0.72rem; }
+
+@media (max-width: 360px) {
+  .tokenCardBody { flex-direction: column; }
+  .tokenCardHeader { gap: 0.35rem; }
+  .tokenNameInput { width: 100%; }
+}
+
+@media (max-width: 280px) {
+  .tokenNameInput { padding: 0.45rem; }
+  .tokenField input { padding: 0.4rem; }
+}
+
+/* New Book Form */
+.newBookForm {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 0.75rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.formField label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-right: 8px;
+}
+
+.formField select,
+.formField input {
+  background: var(--bg-content);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  min-width: 0;
+  width: 100%;
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.formField select:focus,
+.formField input:focus {
+  outline: none;
+  border-color: var(--accent-primary-solid);
+  box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb, 0, 120, 240), 0.15);
+}
+
+.formField input:disabled,
+.formField select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Chapter Editor Responsive Grid */
+.chapterEditGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .chapterEditGrid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .newBookForm {
+    padding: 0.75rem;
+  }
+}

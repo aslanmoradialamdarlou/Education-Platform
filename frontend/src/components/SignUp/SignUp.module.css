@@ -1,0 +1,275 @@
+/* src/components/SignUp/SignUp.module.css */
+.signUpPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--bg-main);
+}
+.signUpBox {
+    width: 100%;
+    max-width: 540px;
+    background-color: var(--bg-content);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px var(--shadow-color);
+    margin: 1rem;
+
+    transition: max-width 300ms ease, padding 300ms ease, width 300ms ease;
+}
+.logo {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-primary-solid);
+    margin-bottom: 1rem;
+}
+.title {
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+.stepInstruction {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+.submitBtn {
+    width: 100%;
+    background: var(--accent-primary-solid);
+    color: #fefefe;
+    border: none;
+    padding: 0.85rem;
+    border-radius: var(--border-radius-md);
+    font-family: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: opacity var(--transition-speed), transform 120ms ease;
+    padding: 0.75rem; font-size: 1rem;
+}
+.submitBtn:hover {
+    opacity: 0.9;
+}
+.submitBtn:active { transform: translateY(1px) scale(0.995); }
+.submitBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* Minimal loading animation for submit button */
+.loading {
+    position: relative;
+}
+.loading::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.9);
+    border-top-color: transparent;
+    border-radius: 50%;
+    position: absolute;
+    /* In RTL UI, place spinner on the left side of the label */
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to   { transform: translateY(-50%) rotate(360deg); }
+}
+.errorText {
+    color: var(--danger-color, #c53030);
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    text-align: right;
+}
+.serverError {
+    color: var(--danger-color, #c53030);
+    background: rgba(197,48,48,0.04);
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid rgba(197,48,48,0.08);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+.resendCode {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Styled resend button used in EnterCodeStep */
+.resendBtn {
+    background: transparent;
+    border: none;
+    color: var(--accent-primary-solid);
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 160ms ease, color 160ms ease, transform 120ms ease;
+    margin-top: 0.5rem;
+}
+.resendBtn:hover {
+    text-decoration: underline;
+    /* background: var(--accent-primary-solid); */
+    /* color: var(--bg-main); */
+    /* transform: translateY(-1px); */
+}
+.resendBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.fullWidth {
+    grid-column: 1 / -1;
+}
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    transition: 0.3s;
+}
+.formGroup label {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: right;
+}
+.inputWrapper {
+    position: relative;
+    outline: none;
+    /* transition: 0.3s; */
+}
+
+input {
+    transition: 0.3s ease;
+}
+
+input:focus {
+    border-color: var(--accent-primary-solid);
+}
+
+.inputIcon {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+.selectInput {
+    width: 100%;
+    padding: 0.85rem 3rem 0.85rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+    border-radius: var(--border-radius-md);
+    font-family: inherit;
+    color: var(--text-primary);
+    font-size: 1rem;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: 0.3s;
+    outline: none;
+    /* border: none; */
+}
+
+.selectInput:focus {
+    border-color: var(--accent-primary-solid);
+    outline: none;
+}
+
+/* .selectInput:focus */
+
+.loginLink {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.loginLink a { color: var(--accent-primary-solid); font-weight: 600; }
+.loginLink a:hover { text-decoration: underline; }
+
+.guestLink {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.guestLink a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+.guestLink a:hover {
+    color: var(--text-primary);
+}
+
+/* Responsive adjustments: stack fields and reduce paddings on small screens */
+@media (max-width: 720px) {
+    /* .signUpBox {
+        padding: 1.25rem;
+        margin: 0.6rem;
+        max-width: 420px;
+    } */
+    .formGrid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    .formGroup { margin-bottom: 1rem; }
+    /* no-op */
+    input, .selectInput {
+        font-size: 0.95rem;
+        padding: 0.7rem 2.6rem 0.7rem 0.9rem;
+    }
+    .inputIcon { right: 0.9rem; }
+    /* .submitBtn { padding: 0.75rem; font-size: 1rem; } */
+}
+
+
+@media (max-width: 420px) {
+    /* .signUpBox { padding: 1rem; margin: 0.5rem; } */
+    .logo { font-size: 2rem; }
+    .title { font-size: 1.05rem; }
+}
+
+/* Slightly wider inputs/layout for large screens */
+@media (min-width: 1100px) {
+    /* .signUpBox { */
+        /* smoothly expand to use more horizontal space on large screens */
+        /* width: calc(100% - 160px); */
+        /* max-width: 900px; cap at a comfortable reading width */
+        /* padding: 2.75rem; */
+        /* } */
+    /* give the left column a bit more space so primary inputs feel larger */
+    .formGrid {
+        /* grid-template-columns: 1.4fr 1fr; */
+        gap: 1.25rem;
+    }
+    .selectInput, input {
+        padding-left: 1.1rem;
+        padding-right: 3rem;
+        font-size: 1.02rem;
+    }
+}
+
+/* @media (min-width: 1400px) {
+    .signUpBox { max-width: 1100px; width: calc(100% - 200px); }
+} */
+
+/* Between tablet and small desktop, give the signUpBox more horizontal room */
+/* @media (min-width: 721px) and (max-width: 1100px) {
+    .signUpBox {
+        width: calc(100% - 80px);
+        max-width: 820px;
+    }
+} */

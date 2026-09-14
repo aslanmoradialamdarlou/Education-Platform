@@ -1,0 +1,272 @@
+/* src/components/Subscription/Subscription.v2.module.css */
+.pageHeader {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: var(--bg-content);
+    border-bottom: 1px solid var(--border-color);
+}
+.pageTitle { 
+    font-size: clamp(1.4rem, 5.5vw, 2.5rem);
+    font-weight: 700; 
+    color: var(--text-primary); 
+    line-height: 1.15;
+}
+.pageSubtitle { font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; }
+
+.plansContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    align-items: stretch;
+}
+
+/* Subscription Card */
+.card {
+    background-color: var(--bg-content);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all var(--transition-speed);
+    outline: none;
+    overflow: hidden;
+}
+.card:focus, .card:focus-within { outline: 2px solid var(--accent-primary-solid); outline-offset: 2px; }
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+.cardHeader {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Token pack specific tweaks */
+.tokenCard .planTitle { font-size: 1.35rem; }
+.tokenHeader { min-height: 122px; display:flex; flex-direction:column; justify-content:center; }
+
+.badgesRow { display:flex; flex-wrap:wrap; gap: .5rem; justify-content:center; margin-bottom: .75rem; }
+.badge { display:inline-flex; align-items:center; gap:.35rem; background: var(--bg-main); color: var(--text-secondary); padding: .25rem .6rem; font-size:.7rem; font-weight:600; border-radius: 999px; border:1px solid var(--border-color); letter-spacing:.3px; }
+.badge svg { width:14px; height:14px; }
+.badge.popular { background: linear-gradient(135deg,#ffed9a,#ffc107); color:#7a4b00; border-color:#ffca2c; box-shadow:0 0 0 1px #ffe58a inset; }
+.badge.saving { background:#e0f7ef; color:#057a55; border-color:#8fdcc5; }
+.badge.tokens { background:#e6f0ff; color:#0b4d99; border-color:#99c2ff; }
+
+.planTagline { font-size:.85rem; color: var(--accent-primary-solid); font-weight:600; margin-top:.25rem; }
+.priceWrap { display:flex; flex-direction:column; align-items:center; gap:.25rem; }
+.originalPrice { font-size:.85rem; text-decoration:line-through; color: var(--text-secondary); opacity:.7; }
+
+.valueMeter { margin-top:1.25rem; background: var(--bg-main); border:1px solid var(--border-color); border-radius:8px; position:relative; height:10px; overflow:hidden; }
+.valueMeterBar { position:absolute; inset:0; background: linear-gradient(90deg, var(--accent-primary-solid), var(--accent-primary-soft)); box-shadow:0 0 0 1px var(--accent-primary-soft) inset; }
+.valueMeterLabel { display:block; margin-top:.4rem; font-size:.65rem; text-align:center; letter-spacing:.5px; color: var(--text-secondary); }
+
+.guarantee { margin-top:.75rem; display:flex; align-items:center; gap:.4rem; font-size:.65rem; color: var(--text-secondary); justify-content:center; }
+.guarantee svg { color: var(--accent-primary-solid); }
+
+#grade:hover {
+    border-color: var(--silver-color);
+}
+
+.planTitle { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+.planPrice { font-size: 2.5rem; font-weight: 700; color: var(--accent-primary-solid); margin: 0.5rem 0; }
+.planPrice span { font-size: 1rem; font-weight: 400; color: var(--text-secondary); }
+.planDescription { font-size: 0.9rem; color: var(--text-secondary); }
+.tokenBenefitTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.cardBody { padding: 1.5rem; }
+.featureList { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.featureList li { display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary); }
+.featureList li svg { color: #198754; flex-shrink: 0; }
+
+.cardFooter { padding: 1.5rem; margin-top: auto; }
+.purchaseBtn {
+    width: 100%;
+    background: var(--accent-primary-solid);
+    color: #fefefe;
+    border: none;
+    padding: 0.85rem;
+    border-radius: var(--border-radius-md);
+    font-family: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: opacity var(--transition-speed);
+}
+.purchaseBtn:hover { opacity: 0.9; }
+
+/* Minimal CTA for token packs */
+.purchaseBtnMinimal {
+    width: auto;
+    min-width: 140px;
+    padding: 0.5rem .85rem;
+    font-size: .95rem;
+    background: transparent;
+    color: var(--accent-primary-solid);
+    border: 1px solid var(--border-color);
+}
+.purchaseBtnMinimal:hover { background: var(--bg-main); opacity: 1; }
+
+/* Emphasize featured container */
+.featuredContainer { position:relative; }
+.featuredContainer .card { border:2px solid #ffca2c; box-shadow:0 10px 30px -5px rgba(255,193,7,.35),0 4px 10px -2px rgba(0,0,0,.15); transform:translateY(-8px); }
+.featuredContainer .card:hover { transform:translateY(-12px); }
+
+/* Tier containers for other plans */
+.tierContainer { position:relative; }
+.tierContainer .card { border-width:2px; }
+.tier_grade .card { border-color:#c0c4d6; box-shadow:0 4px 14px -4px rgba(160,170,200,.35); }
+.tier_chapter .card { border-color:#c28d5b; box-shadow:0 4px 14px -4px rgba(194,141,91,.35); }
+.tier_grade .card:hover, .tier_chapter .card:hover { transform:translateY(-7px); }
+
+
+/* --- Featured Card (Animation Removed) --- */
+.featuredContainer {
+    transition: var (--transition-speed);
+}
+
+/* .featuredContainer .card:hover {
+    border-color: var(--golden-color);
+} */
+
+
+
+/* --- Modal Styles --- */
+.modalOverlay { position: fixed; inset: 0; z-index: 101; display: flex; align-items: center; justify-content: center; }
+.modalBackdrop { position: fixed; inset: 0; background-color: rgba(0,0,0,0.5); }
+.modalContent { position: relative; background-color: var(--bg-content); width: 100%; max-width: 400px; border-radius: 12px; }
+.modalHeader { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+.modalTitle { font-size: 1.2rem; font-weight: 700; }
+.closeModalBtn { background: none; border: none; cursor: pointer; color: var(--text-secondary); }
+.modalBody { padding: 1.5rem; }
+.modalFooter { padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); }
+.selectorGroup { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.selectorGroup label { font-size: 0.9rem; color: var(--text-secondary); }
+.selectInput { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); background-color: var(--bg-main); border-radius: var(--border-radius-md); font-family: inherit; color: var(--text-primary); }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .plansContainer { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .modalContent { max-width: none; height: 100%; inset: 0; border-radius: 0; display: flex; flex-direction: column; }
+    .modalBody { flex: 1; overflow-y: auto; }
+}
+
+/* === Token Packs Section Styles === */
+.tokenPacksSection {
+    max-width: 1200px;
+    margin: 2rem auto 3rem;
+    padding: 0 2rem;
+}
+
+.tokenPacksHeader {
+    text-align: center;
+    margin-bottom: 1.75rem;
+}
+
+.tokenPacksTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.tokenPacksSubtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.tokenPacksGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 280px));
+    gap: 1.25rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+/* Token Card Specific Styles */
+.tokenCard {
+    max-width: 280px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tokenCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px -6px rgba(0,0,0,0.15);
+}
+
+.tokenHeader {
+    padding: 1.25rem;
+}
+
+.tokenPackTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0.5rem 0 0.25rem;
+}
+
+.tokenPackSubtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.tokenPackPrice {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent-primary-solid);
+    margin: 0.5rem 0 0;
+}
+
+.tokenCardFooter {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Responsive adjustments for token packs */
+@media (max-width: 768px) {
+    .tokenPacksGrid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .tokenCard {
+        max-width: 100%;
+    }
+    
+    .tokenPackTitle {
+        font-size: 1rem;
+    }
+    
+    .tokenPackPrice {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tokenPacksSection {
+        padding: 0 1rem;
+    }
+    
+    .tokenPacksGrid {
+        grid-template-columns: 1fr;
+    }
+}

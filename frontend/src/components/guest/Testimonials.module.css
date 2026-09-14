@@ -1,0 +1,41 @@
+.section { width: 100%; padding: 3rem 0; font-family: 'Vazirmatn', sans-serif; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-color); }
+.section::after { content: ''; position: absolute; inset: auto -10% -10% -10%; height: 160px; background: radial-gradient(520px 180px at 85% 100%, color-mix(in srgb, var(--border-color) 25%, transparent), transparent 60%); pointer-events: none; }
+.wrap { padding: 0 16px; max-width: 1200px; margin: 0 auto; }
+
+.header { text-align: center; margin-bottom: 1.25rem; }
+.header h2 { font-size: clamp(1.25rem, 3.5vw, 1.8rem); margin: 0 0 .5rem; }
+.ratingRow { display: inline-flex; align-items: center; gap: .5rem; color: var(--text-secondary); }
+.stars, .userStars { color: #F59E0B; display: inline-flex; gap: 2px; }
+.ratingText { font-size: .9rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.userRow { display: grid; grid-template-columns: auto 1fr auto; gap: .75rem; align-items: center; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--bg-content); border: 1px solid var(--border-color); display: grid; place-items: center; font-weight: 700; font-size: .9rem; }
+.meta { text-align: right; }
+.name { font-weight: 700; color: var(--text-primary); }
+.role { font-size: .85rem; color: var(--text-secondary); }
+.quote { margin: 0; line-height: 1.85; color: var(--text-primary); text-align: right; }
+
+@media (max-width: 800px) {
+  .section { padding: 2.5rem 0; }
+}
+
+@media (max-width: 480px) {
+  .grid { gap: 12px; }
+  .card { padding: 12px; }
+}

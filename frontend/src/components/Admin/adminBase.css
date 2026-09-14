@@ -1,0 +1,391 @@
+/* Lightweight admin utility & component primitives (Tier1 refactor) */
+/* CSS Custom Properties (shared) */
+:root {
+	--btn-radius-md: var(--border-radius-md, 8px);
+	--btn-radius-pill: 999px;
+	--btn-font-size-sm: .7rem;
+	--chip-font-size: .6rem;
+	--chip-padding-y: .3rem;
+	--chip-padding-x: .6rem;
+}
+
+/* Layout utilities */
+.flex { display:flex; }
+.flex-col { flex-direction:column; }
+.flex-row { flex-direction:row; }
+.items-center { align-items:center; }
+.justify-between { justify-content:space-between; }
+.gap-xs { gap:.35rem; }
+.gap-sm { gap:.5rem; }
+.gap-md { gap:.75rem; }
+.gap-lg { gap:1rem; }
+.wrap { flex-wrap:wrap; }
+
+/* Card / surface */
+.adminCard { background: var(--bg-content); border:1px solid var(--border-color); border-radius: var(--border-radius-lg); padding:1rem 1.1rem; position:relative; }
+.adminCard--tight { padding:.75rem .9rem; }
+
+/* Headings & text */
+.title-md { font-size:1.15rem; font-weight:700; margin:0 0 .75rem; color:var(--text-primary); line-height:1.2; }
+.title-sm { font-size:.9rem; font-weight:600; margin:0 0 .5rem; color:var(--text-primary); }
+.text-sm { font-size:.75rem; line-height:1.5; }
+.text-xs { font-size:.65rem; line-height:1.4; }
+.text-muted { color:var(--text-secondary); }
+
+/* Buttons */
+.btn { font:inherit; display:inline-flex; align-items:center; justify-content:center; gap:.4rem; cursor:pointer; border:1px solid transparent; border-radius:var(--btn-radius-md); padding:.55rem .9rem; font-size:var(--btn-font-size-sm); line-height:1.2; background:var(--bg-content); color:var(--text-primary); transition:background .2s,border-color .2s,color .2s,transform .15s; }
+.btn:active { transform:translateY(1px); }
+.btn-primary { background:var(--accent-primary-solid); color:#fff; }
+.btn-primary:hover { opacity:.9; }
+.btn-outline { background:transparent; border-color:var(--border-color); }
+.btn-outline:hover { border-color:var(--accent-primary-solid); color:var(--accent-primary-solid); }
+.btn-icon { width:34px; height:34px; padding:0; border-radius:50%; background:var(--bg-content); }
+.btn-icon:hover { background:var(--bg-main); }
+
+/* Minimal loading spinner for buttons: add .loading to any .btn to show spinner */
+.btn.loading { position: relative; padding-inline-start: 28px; }
+.btn.loading::after {
+	content: "";
+	width: 14px;
+	height: 14px;
+	border: 2px solid rgba(255,255,255,0.9);
+	border-top-color: transparent;
+	border-radius: 50%;
+	position: absolute;
+	left: 12px; /* keep spinner on the visual left consistently */
+	top: 50%;
+	transform: translateY(-50%);
+	animation: admin-spin 0.8s linear infinite;
+}
+
+@keyframes admin-spin {
+	from { transform: translateY(-50%) rotate(0deg); }
+	to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Badge / chip */
+.badge { display:inline-flex; align-items:center; font-size:var(--chip-font-size); padding:var(--chip-padding-y) var(--chip-padding-x); border-radius:var(--btn-radius-pill); border:1px solid var(--border-color); color:var(--text-secondary); background:var(--bg-content); line-height:1; white-space:nowrap; }
+.badge-outline { background:var(--bg-content); }
+.badge-accent { color:#fff; background:var(--accent-primary-solid); border-color:var(--accent-primary-solid); }
+
+/* Progress (for future replacements) */
+.progress { background:var(--border-color); border-radius:8px; height:8px; overflow:hidden; position:relative; }
+.progress-bar { position:absolute; inset:0 100% 0 0; background:var(--accent-primary-solid); transition:inset .3s; }
+
+/* Note: Dashboard-specific styles moved to AdminDashboard.css */
+/* Keep only shared utilities, buttons, badges, progress, drawer, pagination, avatar, scroll */
+/* Shared Drawer (overlay + panel) */
+.drawerRoot { position: fixed; inset: 0; z-index: 9900; }
+.drawerOverlay { position: absolute; inset: 0; background: rgba(0,0,0,.45); z-index: 0; opacity: 0; transition: opacity .3s ease; }
+.drawerRoot.open .drawerOverlay { opacity: 1; }
+.drawerPanel { position: absolute; top: 0; bottom: 0; right: 0; width: min(92vw, 780px); max-width: 780px; background: var(--bg-content); border-left: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,.18); transform: translateX(100%); transition: transform .3s ease; display:flex; flex-direction:column; z-index: 1; will-change: transform; }
+.drawerPanel.open { transform: translateX(0); }
+.drawerInner { height: 100%; display: flex; flex-direction: column; padding: .9rem .9rem 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+/* Hide native scrollbar on the drawer while preserving scroll behavior */
+.drawerInner {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+.drawerInner::-webkit-scrollbar { display: none; height: 0; width: 0; }
+.drawerSection { padding: .75rem; }
+.drawerInner > .drawerSection:first-child { position: sticky; top: 0; background: var(--bg-content); z-index: 2; border-bottom: 1px solid var(--border-color); }
+.divider { height:1px; background: var(--border-color); border:0; margin: .35rem 0; }
+/* Sticky footer for drawer actions */
+.drawerFooter { position: sticky; bottom: 0; background: var(--bg-content); border-top: 1px solid var(--border-color); padding: .75rem; display: flex; justify-content: flex-end; gap: .6rem; z-index: 2; }
+@media (max-width:680px){ .drawerPanel { width: 96vw; } }
+
+/* Pagination helpers */
+.paginationRow { display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .6rem 0; }
+.paginationRow .rowsSelect { background: var(--bg-content); border:1px solid var(--border-color); border-radius:999px; padding:.4rem .6rem; font-size:.75rem; color:var(--text-primary); }
+.paginationRow .rowsSelect:focus { outline:none; border-color: var(--accent-primary-solid); box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb,0,120,240),.15); }
+
+/* Simple toast */
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px; background: var(--bg-content); color: var(--text-primary); border:1px solid var(--border-color); border-radius: var(--border-radius-md); padding: .6rem .8rem; box-shadow: 0 6px 20px rgba(0,0,0,.12); z-index: 3700; }
+.toast-success { border-color: #198754; }
+.toast-error { border-color: #dc3545; }
+
+/* Collapsible sections (for filters) */
+.collapsible { overflow: hidden; max-height: 0; opacity: 0; transform: translateY(-4px); transition: max-height .28s ease, opacity .22s ease, transform .22s ease; }
+.collapsible.open { max-height: 1200px; opacity: 1; transform: translateY(0); }
+.filterToggleRow { display: flex; align-items: center; justify-content: flex-start; gap: .5rem; margin-bottom: .5rem; }
+
+/* Filter helpers */
+.resultsBadge { display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border-radius:999px; border:1px solid var(--border-color); font-size:.72rem; color:var(--text-secondary); background:var(--bg-content); }
+.clearBtn { background:transparent; border:none; color:var(--accent-primary-solid); cursor:pointer; font-size:.75rem; padding:.25rem .4rem; border-radius:8px; }
+.clearBtn:hover { background: var(--bg-main); }
+
+/* Tooltip primitive */
+.tooltip { position: absolute; z-index: 4000; pointer-events: none; opacity: 0; transform: translateY(6px); transition: opacity .18s ease, transform .18s ease; }
+.tooltip.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.tooltip-card { background: var(--bg-content); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: .6rem .75rem; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 1000; position: relative; }
+/* RTL / right-aligned tooltip contents */
+.tooltip-card { display: flex; flex-direction: column; gap: .35rem; text-align: right; direction: rtl; align-items: flex-end; }
+.tooltip-card .text-sm { width: 100%; }
+	/* Tooltip arrow rendered as part of the card so it can layer behind the surface */
+	.tooltip.tooltip-top .tooltip-card::before,
+	.tooltip.tooltip-bottom .tooltip-card::before {
+		content: "";
+		position: absolute;
+		left: 8px;
+		width: 10px; height: 10px;
+		background: var(--bg-content);
+		border: 1px solid var(--border-color);
+		transform: rotate(45deg);
+		box-shadow: 2px 2px 3px rgba(0,0,0,.06);
+		pointer-events: none;
+		z-index: 100; /* slightly behind the card (card is 101) */
+	}
+	/* position the arrow for top vs bottom */
+	.tooltip.tooltip-top .tooltip-card::before { bottom: -6px; }
+	.tooltip.tooltip-bottom .tooltip-card::before { top: -6px; box-shadow: -2px -2px 3px rgba(0,0,0,.06); }
+
+/* Tabs (modern tab-like design) */
+.tabsHeader {
+	display: flex; gap: 0; align-items: stretch;
+	border-bottom: 1px solid var(--border-color);
+	padding: 0;
+	overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
+	width: 100%; max-width: 100%; min-width: 0; contain: inline-size;
+	scroll-snap-type: x proximity;
+	background: var(--bg-main);
+}
+.tabBtn {
+	display: inline-flex; align-items: center; gap: .45rem;
+	min-height: 40px; padding: .6rem 1rem;
+	background: transparent;
+	border: none;
+	/* border-top: 3px solid transparent; */
+	border: 1px solid var(--border-color);
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	border-bottom: 2px solid transparent;
+	color: var(--text-secondary);
+	cursor: pointer; white-space: nowrap;
+	font-size: .85rem; font-weight: 500;
+	transition: all .2s ease;
+	scroll-snap-align: start;
+	position: relative;
+}
+.tabBtn:hover { 
+	background: var(--bg-content); 
+	color: var(--text-primary); 
+	border-bottom-color: var(--border-color);
+}
+.tabBtn.active { 
+	background: var(--bg-content); 
+	color: var(--accent-primary-solid); 
+	border-bottom-color: var(--accent-primary-solid);
+	font-weight: 600;
+}
+.tabBtn:focus-visible { outline: 2px solid var(--accent-primary-solid); outline-offset: -2px; }
+
+/* Tab content: do not shrink on mobile; enable horizontal scroll instead */
+.tabContentViewport { width: 100%; overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; }
+.tabContentInner { min-width: 840px; /* keeps desktop layout width by default */ }
+
+/* Fluid variant: allow content to shrink to container width (use selectively per tab) */
+.tabContentInner--fluid { min-width: 0 !important; width: 100%; }
+
+/* Shared filter pills (match UserManagement) */
+.detailFilterContainer { width: 100%; }
+.detailFilterContainer .filterGroup { display:flex; flex-direction:column; gap:.35rem; min-width: 160px; }
+.detailFilterContainer .filterGroup label { font-size:.8rem; color:var(--text-secondary); margin-right:8px; }
+.detailFilterContainer .filterGroup select,
+.detailFilterContainer .filterGroup input[type="text"],
+.detailFilterContainer .filterGroup input[type="email"],
+.detailFilterContainer .filterGroup input[type="tel"],
+.detailFilterContainer .filterGroup input[type="number"],
+.detailFilterContainer .filterGroup input[type="date"],
+.detailFilterContainer .filterGroup textarea {
+	background: var(--bg-content);
+	border: 1px solid var(--border-color);
+	border-radius: 999px;
+	padding: 0.55rem 0.9rem;
+	font-family: inherit;
+	font-size: 0.85rem;
+	color: var(--text-primary);
+	min-width: 0; /* allow shrinking in narrow cards */
+	line-height: 1.2; width: 100%; max-width: 100%;
+  appearance: none;
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background var(--transition-speed);
+}
+
+.detailFilterContainer .filterGroup textarea { border-radius: 12px; min-height: 80px; resize: vertical; }
+.detailFilterContainer .filterGroup input::placeholder,
+.detailFilterContainer .filterGroup textarea::placeholder { color: var(--text-secondary); opacity: .7; }
+
+/* Prevent long strings from blowing out layout when mirrored in static text blocks */
+.text-break { overflow-wrap: anywhere; word-break: break-word; }
+.detailFilterContainer .filterGroup select:focus,
+.detailFilterContainer .filterGroup input[type="text"]:focus,
+.detailFilterContainer .filterGroup input[type="email"]:focus,
+.detailFilterContainer .filterGroup input[type="tel"]:focus,
+.detailFilterContainer .filterGroup input[type="number"]:focus,
+.detailFilterContainer .filterGroup input[type="date"]:focus,
+.detailFilterContainer .filterGroup textarea:focus {
+  outline: none; border-color: var(--accent-primary-solid);
+  box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb, 0,120,240), 0.15);
+  background: var(--bg-elevated, #fff);
+}
+
+/* Search field helpers inside detail filters */
+.detailFilterContainer .inputWrap { position: relative; }
+.detailFilterContainer .inputWrap .searchIcon { position: absolute; inset-inline-start: 10px; top: 50%; transform: translateY(-50%); opacity: .7; pointer-events: none; }
+.detailFilterContainer .inputWrap input[type="text"] { padding-inline-start: 30px; }
+
+/* Drawer editor filters (used in Admin add/edit drawers) */
+.drawerFilters { width: 100%; max-width: 100%; }
+.drawerFilters .filterGroup { display:flex; flex-direction:column; gap:.35rem; min-width: 0; position: relative; }
+.drawerFilters .filterGroup label { font-size:.8rem; color:var(--text-secondary); margin-right:8px; }
+.drawerFilters .filterGroup select,
+.drawerFilters .filterGroup input[type="text"],
+.drawerFilters .filterGroup input[type="date"],
+.drawerFilters .filterGroup input[type="email"],
+.drawerFilters .filterGroup input[type="tel"],
+.drawerFilters .filterGroup input[type="password"],
+.drawerFilters .filterGroup input[type="number"],
+.drawerFilters .filterGroup textarea {
+	background: var(--bg-content);
+	border: 1px solid var(--border-color);
+	border-radius: 999px;
+	padding: 0.55rem 0.9rem;
+	font-family: inherit;
+	font-size: 0.85rem;
+	color: var(--text-primary);
+	min-width: 180px;
+	line-height: 1.2;
+	appearance: none;
+	transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background var(--transition-speed);
+}
+.drawerFilters .filterGroup textarea { border-radius: 12px; min-height: 96px; resize: none; }
+.drawerFilters .filterGroup input::placeholder,
+.drawerFilters .filterGroup textarea::placeholder { color: var(--text-secondary); opacity: .7; }
+.drawerFilters .filterGroup select:focus,
+.drawerFilters .filterGroup input[type="text"]:focus,
+.drawerFilters .filterGroup input[type="date"]:focus,
+.drawerFilters .filterGroup input[type="email"]:focus,
+.drawerFilters .filterGroup input[type="tel"]:focus,
+.drawerFilters .filterGroup input[type="password"]:focus,
+.drawerFilters .filterGroup input[type="number"]:focus,
+.drawerFilters .filterGroup textarea:focus {
+	outline: none; border-color: var(--accent-primary-solid);
+	box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb, 0,120,240), 0.15);
+	background: var(--bg-elevated, var(--bg-content));
+}
+
+/* Stronger override: drawer panel inputs should not turn bright white on focus */
+.drawerPanel .drawerFilters .filterGroup select:focus,
+.drawerPanel .drawerFilters .filterGroup input:focus,
+.drawerPanel .drawerFilters .filterGroup textarea:focus {
+  background: var(--bg-content) !important;
+  border-color: var(--accent-primary-solid);
+  box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb, 0,120,240), 0.08) !important;
+}
+
+/* Reusable input pill style for inline editors (e.g., matching questions) */
+.inputPill,
+.inputPill[type="text"],
+.inputPill[type="number"],
+.inputPill[type="email"],
+.inputPill[type="tel"],
+.inputPill[type="date"],
+.inputPill::file-selector-button,
+.inputPill-select,
+.inputPill textarea,
+.inputPill select {
+	background: var(--bg-content);
+	border: 1px solid var(--border-color);
+	border-radius: 999px;
+	padding: 0.55rem 0.9rem;
+	font-family: inherit;
+	font-size: 0.85rem;
+	color: var(--text-primary);
+	min-width: 0;
+	width: 100%;
+	line-height: 1.2;
+	appearance: none;
+	transition: border-color var(--transition-speed, .2s ease), box-shadow var(--transition-speed, .2s ease), background var(--transition-speed, .2s ease);
+}
+.inputPill::placeholder { color: var(--text-secondary); opacity: .7; }
+.inputPill:focus,
+.inputPill-select:focus,
+.inputPill select:focus,
+.inputPill textarea:focus {
+	outline: none; border-color: var(--accent-primary-solid);
+	box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb, 0,120,240), 0.12);
+	background: var(--bg-content);
+}
+/* Remove number spinners for a cleaner look */
+.inputPill[type="number"]::-webkit-outer-spin-button,
+.inputPill[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.inputPill[type="number"] { appearance: textfield; -moz-appearance: textfield; }
+
+	/* Generic filter grid layout (reusable) */
+	/* Responsive grid: adapts column count to container width to prevent overflow in cards */
+	.filterGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: .6rem; width: 100%; max-width: 100%; }
+	.filterGrid--2col { grid-template-columns: repeat(2, minmax(0,1fr)); }
+	.filterGrid .full-span { grid-column: 1 / -1; }
+
+	@media (max-width: 680px){
+		.filterGrid { grid-template-columns: 1fr; width: 100%; }
+		.filterGrid--2col { grid-template-columns: 1fr; }
+		.detailFilterContainer .filterGroup { min-width: 0; width: 100%; }
+		.detailFilterContainer .filterGroup select,
+		.detailFilterContainer .filterGroup input[type="text"],
+		.detailFilterContainer .filterGroup input[type="email"],
+		.detailFilterContainer .filterGroup input[type="tel"],
+		.detailFilterContainer .filterGroup input[type="number"],
+		.detailFilterContainer .filterGroup input[type="date"],
+		.detailFilterContainer .filterGroup textarea { min-width: 0; width: 100%; max-width: 100%; }
+	}
+
+	@media (max-width: 480px){
+		.filterGrid { grid-template-columns: 1fr; }
+		.detailFilterContainer .filterGroup { min-width: 0; width: 100%; }
+		.detailFilterContainer .filterGroup select,
+		.detailFilterContainer .filterGroup input[type="text"],
+		.detailFilterContainer .filterGroup input[type="email"],
+		.detailFilterContainer .filterGroup input[type="tel"],
+		.detailFilterContainer .filterGroup input[type="number"],
+		.detailFilterContainer .filterGroup input[type="date"] {
+			min-width: 0; width: 100%; max-width: 100%;
+		}
+	}
+
+/* Responsive fixes for very small screens */
+/* Keep content width and allow horizontal scroll even on small screens */
+
+@media (max-width: 360px){
+	.detailFilterContainer .filterGroup { min-width: 0; }
+	.detailFilterContainer .filterGroup select,
+	.detailFilterContainer .filterGroup input[type="text"],
+	.detailFilterContainer .filterGroup input[type="email"],
+	.detailFilterContainer .filterGroup input[type="tel"],
+	.detailFilterContainer .filterGroup input[type="number"]{
+		min-width: 0; width: 100%;
+	}
+}
+
+	/* Modal primitives */
+	.modalRoot { position: fixed; inset: 0; z-index: 9900; }
+	.modalOverlay { position: absolute; inset: 0; background: rgba(0,0,0,.45); }
+	.modalPanel { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); background: var(--bg-content); color: var(--text-primary); border:1px solid var(--border-color); border-radius: var(--border-radius-lg); width: min(92vw, 520px); max-width: 96vw; max-height: 92vh; overflow: auto; -webkit-overflow-scrolling: touch; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+	.modalHeader { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-color); }
+	.modalBody { padding: 1rem 1.25rem; }
+	.modalActions { display: flex; gap: .6rem; justify-content: flex-end; padding: 0 1.25rem 1rem; }
+	.btn-danger { background: #dc3545; color: #fff; border-color: #dc3545; }
+	.btn-danger:hover { opacity: .9; }
+
+	/* Simple iOS-like switch */
+	.switch { position: relative; display: inline-block; width: 42px; height: 24px; }
+	.switch input { opacity: 0; width: 0; height: 0; }
+	.switch .slider { position: absolute; cursor: pointer; inset: 0; background: var(--border-color); border-radius: 999px; transition: background .2s; }
+	.switch .slider::before { content: ""; position: absolute; height: 18px; width: 18px; border-radius: 50%; left: 3px; top: 3px; background: #fff; transition: transform .2s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+	.switch input:checked + .slider { background: var(--accent-primary-solid); }
+	.switch input:checked + .slider::before { transform: translateX(18px); }
+
+/* Small screens: keep modal fully visible and allow full scrolling */
+@media (max-width: 480px){
+	.modalPanel { width: 96vw; max-width: 96vw; max-height: 92vh; overflow: auto; }
+}

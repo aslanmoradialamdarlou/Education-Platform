@@ -1,0 +1,51 @@
+ریسپانسیوی در صفحه لاگین
+
+Filtering & Discovery
+Subject filter (ریاضی / علوم / شیمی / فارسی / جامع)
+Grade level filter (پایه هفتم، هشتم، نهم, etc.)
+Difficulty filter (if PDFs are tagged)
+Free vs. premium toggle
+Text search (title keywords)
+Tag cloud or quick chips (e.g., تیزهوشان, المپیاد, نهایی)
+Sorting Controls
+Sort by: جدیدترین، محبوب‌ترین، بیشترین صفحات، رایگان اول
+Pagination / Infinite Scroll
+Current list is static; needs page controls or lazy loading.
+Access / Subscription UX
+Lock overlay for premium PDFs (with CTA: ارتقا به اشتراک)
+Token cost indicator if applicable
+Upsell banner if user is free
+PDF Preview & Detail
+Hover quick actions (پیش‌نمایش / افزودن به لیست من / دانلود)
+Dedicated detail modal/page: description, sample pages, metadata (درس، پایه، تعداد صفحات، تاریخ بروزرسانی)
+User Interaction Features
+Favorite / Bookmark (لیست من)
+Download history
+Rating (امتیاز کاربران)
+View count (بازدید)
+State Management / Feedback
+Loading skeleton grid
+Empty state (هیچ فایل مطابق با فیلترها یافت نشد)
+Error state (مشکل در بارگذاری، دکمه تلاش مجدد)
+Layout & Navigation Enhancements
+Breadcrumb: خانه > نمونه سوالات > (درس/پایه)
+Sticky filters sidebar (desktop)
+Mobile slide-in filter panel
+Performance / Optimization
+Virtualized grid for large lists
+Prefetch on hover (for detail modal)
+SEO / Content
+Dynamic <title> and <meta description>
+Structured data tags (JSON-LD for educational resources)
+Analytics Hooks
+Log: filter change, preview open, download, upgrade conversion
+Accessibility
+ARIA roles: grid/list semantics
+Keyboard nav for cards and actions
+Internationalization Alignment
+Centralize Persian labels in a locale map
+Theming Consistency
+Use ThemeContext instead of local isDarkMode duplication
+Reusability
+Shared FilterSidebar variant (reuse logic from Question Bank)
+PdfListProvider for data + pagination context
